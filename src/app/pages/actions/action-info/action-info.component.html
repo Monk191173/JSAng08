@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img [src]="filePath" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{name}}</h5>
+                        <p class="card-text">{{description}}</p>
+                    </div>
+                </div>
+            </div>
+            <a [routerLink]="['/actions']" class="btn mb-3 more">Close</a>
+        </div>
+    </div>
+</div>

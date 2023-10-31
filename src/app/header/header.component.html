@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-xl navbar-light  p-0">
+    <div class="container-fluid p-0 m-con">
+        <div class="logo">
+            <div>
+                <a [routerLink]="['/home']">
+                    <img src="../../assets/images/logo.svg" alt="">
+                </a>
+            </div>
+        </div>
+        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav nav">
+                <!-- <li class="nav-item logo">
+                    <div class="">
+                        <a >
+                             me-auto mb-2 mb-lg-0
+                        </a>
+                    </div>
+                </li> -->
+                <li class="nav-item ">
+                    <a [routerLink]="['/actions']">
+                        <img src="../../assets/images/actions.svg" class="nav-link active " aria-current="page">
+                        <span>Акції</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/products/roli']">
+                        <img src="../../assets/images/rolls.svg" class="nav-link">
+                        <span>Роли</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/products/setu']">
+                        <img src="../../assets/images/sets.svg" class="nav-link">
+                        <span>Сети</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/products/napoyi']">
+                        <img src="../../assets/images/drinks.svg" class="nav-link">
+                        <span>Напої</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/products/sousi']">
+                        <img src="../../assets/images/souses.svg" class="nav-link">
+                        <span>Соуси</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a>
+                        <div class="dropdown">
+                            <button class="btn " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" [routerLink]="['/dostavka-ta-oplata']">Доставка та
+                                        оплата</a>
+                                </li>
+                                <li><a class="dropdown-item" [routerLink]="['/about-us']">Про нас</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/actions']">Акції</a></li>
+                            </ul>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                        <div class="callback">
+                            <img src="../../assets/images/phone.svg" class="nav-link">
+                            <span>ми зателефонуємо</span>
+                        </div>
+                </li>
+
+                <li class="nav-item flex-row">
+                        <div class="header-info ms-3">
+                            <a class="header-info-phone" href="tel:+380978780837">+380978780837</a>
+                            <span class="header-info-time">Працюємо з <b>11:00</b> до <b>22:30</b></span>
+                        </div>
+                </li>
+
+                <li class="nav-item">
+                    <a [routerLink]="['/admin']">
+                        <div class="adminka">
+
+                            <img src="../../assets/images/user.svg" class="nav-link">
+
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <div class="basket">
+                        <a href="">
+                            <i>
+                                <img src="../../assets/images/basket.svg">
+                                <span>0</span>
+                            </i>
+                        </a>
+                        <div class="price">
+                            <b>0 </b>
+                            <span>грн</span>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>

@@ -1,0 +1,71 @@
+@import "../../shared/styles/main";
+
+.zona {
+    display: flex;
+    justify-content: center;
+    // flex-wrap: wrap;
+
+    &-green,
+    &-yellow,
+    &-red {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-green h3,
+    &-green span {
+        color: green;
+        font-weight: bolder;
+    }
+
+    &-yellow h3,
+    &-yellow span {
+        color: rgb(255, 196, 0);
+        font-weight: bolder;
+    }
+
+    &-red h3,
+    &-red span {
+        color: red;
+        font-weight: bolder;
+    }
+
+    &-text {
+        text-align: center;
+    }
+
+    &-img img {
+        width: 80%;
+    }
+}
+
+.karta {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.oplata {
+    display: flex;
+
+    &-info {
+        display: flex;
+    }
+
+    &-img {
+        position: relative;
+        max-width: 53px;
+        width: 100%;
+        height: 50px;
+        margin-right: 10px;
+        background-color: $main_color;
+        border-radius: 10px;
+
+        & img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<div class="spacer"></div>
+<div class="center-info">
+    <h1 class="h2 title text-center">Акції на суші</h1>
+</div>
+<div class="spacer"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5 m-auto mb-3" *ngFor="let action of curActions">
+            <div class="d-flex flex-column text-center">
+                <img [src]="action.filePath" class="rounded-3">
+                <span>{{action.name}}</span>
+                <hr class="action-hr">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn more w-100 text-uppercase text-dark fw-bold" type="button"
+                        [routerLink]="['/action',action.id]">Дізнатися більше</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

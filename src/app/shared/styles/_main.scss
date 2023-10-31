@@ -1,0 +1,48 @@
+@import "../../../assets/fonts/fonts";
+
+* {
+    font-family: Rotonda;
+}
+
+$main_color: rgb(181, 216, 247);
+
+.bg-main {
+    background-color: $main_color;
+}
+
+.spacer {
+    height: 20px;
+}
+
+.center-info {
+    margin: 0 auto;
+    max-width: 550px;
+    text-align: center;
+
+    & .title {
+        position: relative;
+        display: inline-block;
+        padding-top: 10px;
+        color: #252525;
+        font-weight: bold;
+        text-align: center;
+        z-index: -1;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            width: 100%;
+            height: 5px;
+            background: #b5d8f7;
+        }
+    }
+
+    & .h2 {
+        font-size: 42px;
+        line-height: 1.2em;
+    }
+}
+

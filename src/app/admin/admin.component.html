@@ -1,0 +1,30 @@
+<div class="container-fluid border  p-1">
+    <ul class="nav nav-pills mb-3 bg-warning bg-gradient rounded-2" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                type="button" role="tab" aria-controls="pills-home" aria-selected="true"
+                [routerLink]="['admin-actions']">Actions</button>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                aria-expanded="false">Products</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" [routerLink]="['products/roli']">Rols</a></li>
+                <li><a class="dropdown-item" [routerLink]="['products/setu']">Sets</a></li>
+                <li><a class="dropdown-item" [routerLink]="['products/napoyi']">Drinks</a></li>
+                <li><a class="dropdown-item" [routerLink]="['products/sousi']">Sauces</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Secret</a></li>
+            </ul>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+                type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+        </li>
+    </ul>
+    <div class="tab-content p-1 border rounded-2" id="pills-tabContent">
+        <router-outlet></router-outlet>
+    </div>
+</div>
