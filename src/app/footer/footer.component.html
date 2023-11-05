@@ -1,10 +1,12 @@
 <div class="container-fluid">
     <footer class="footer-div">
         <div class="footer-div-top row">
-            <a [routerLink]="['/home']" class="col-lg-2">
-                <img src="../../assets/images/logo.svg" alt="">
-            </a>
-            <div class="m-li col-lg-3">
+            <div class="col" style="max-width: 175px;">
+                <a [routerLink]="['/home']">
+                    <img src="../../assets/images/logo.svg" alt="">
+                </a>
+            </div>
+            <div class="m-li col">
                 <ul class="d-flex">
                     <li>
                         <a [routerLink]="['/actions']">Акції на суші</a>
@@ -17,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="footer-div-info col-lg-7">
+            <div class="footer-div-info col">
                 <div>
                     <p><strong>Точки самовивозу</strong></p>
                     <p>вул. Володимира Великого, 10в</p>
@@ -34,10 +36,10 @@
             </div>
         </div>
         <div class="footer-div-bottom row">
-            <div class="col-lg-2">
-                <p>© 2023 Evgen Pakhalyuk</p>
+            <div class="col" style="max-width: 175px;">
+                <p class="me-1">© 2023 Evgen Pakhalyuk</p>
             </div>
-            <div class="pay-cards col-lg-3">
+            <div class="pay-cards col">
                 <div class="pay-cards-item">
                     <img alt="" src="../../assets/images/pay-card-img-1.svg">
                 </div>
@@ -48,7 +50,7 @@
                     <img alt="" src="../../assets/images/pay-card-img-3.svg">
                 </div>
             </div>
-            <div class="m-soc col-lg-7">
+            <div class="m-soc col">
                 <div class="social">
                     <span>Слідкуйте за нами</span>
                     <ul>

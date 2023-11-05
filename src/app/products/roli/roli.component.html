@@ -3,3 +3,93 @@
     <h1 class="h2 title text-center">Роли</h1>
 </div>
 <div class="spacer"></div>
+<div class="container-fluid m-auto">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button"
+                role="tab" aria-controls="all" aria-selected="true" (click)="setSubCat('All')">Всі</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="filad-tab" data-bs-toggle="tab" data-bs-target="#filad" type="button"
+                role="tab" aria-controls="filad" aria-selected="false" (click)="setSubCat('Філаделфія')">Роли
+                Філаделфія</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="calif-tab" data-bs-toggle="tab" data-bs-target="#calif" type="button"
+                role="tab" aria-controls="calif" aria-selected="false" (click)="setSubCat('Каліфорнія')">Роли
+                Каліфорнія</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="zapec-tab" data-bs-toggle="tab" data-bs-target="#zapec" type="button"
+                role="tab" aria-controls="zapec" aria-selected="false" (click)="setSubCat('Запечені роли')">Запечені
+                Роли</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="firm-tab" data-bs-toggle="tab" data-bs-target="#firm" type="button" role="tab"
+                aria-controls="firm" aria-selected="false" (click)="setSubCat('Фірмові')">Фірмові Суші</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="maki-tab" data-bs-toggle="tab" data-bs-target="#maki" type="button" role="tab"
+                aria-controls="maki" aria-selected="false" (click)="setSubCat('Макі')">Роли Макі</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="premium-tab" data-bs-toggle="tab" data-bs-target="#premium" type="button"
+                role="tab" aria-controls="premium" aria-selected="false" (click)="setSubCat('Преміум')">Преміум
+                Суші</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="filad" role="tabpanel" aria-labelledby="filad-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="calif" role="tabpanel" aria-labelledby="calif-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="zapec" role="tabpanel" aria-labelledby="zapec-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="firm" role="tabpanel" aria-labelledby="firm-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="maki" role="tabpanel" aria-labelledby="maki-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+        <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
+            <ng-container *ngTemplateOutlet="showProduct"></ng-container>
+        </div>
+
+    </div>
+    <ng-template #showProduct>
+        <div class="row d-flex justify-content-between ">
+            <div class="col d-flex justify-content-center" *ngFor="let prod of product | filter:'Роли':subCategoryName ">
+                <div class="card m-3 p-1" style="width: 30rem; min-height: 300px;">
+                    <img [src]="prod.filePath" class="card-img-top" [alt]="prod.name">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title fw-bold text-center">{{ prod.name }}</h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text me-1">{{ prod.description }}</p>
+                            <p class="card-text" style="min-width: 40px;">{{ prod.weight }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <div>
+                                <p class="m-0"><strong>{{ prod.price }}</strong> грн</p>
+                            </div>
+                            <div class="btn-group p-1" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-secondary p-1">-</button>
+                                <input type="text" class="btn btn-outline-secondary p-1" style="max-width: 40px;"
+                                    value="1" readonly>
+                                <button type="button" class="btn btn-outline-secondary p-1">+</button>
+                            </div>
+                            <div class="fs-6">
+                                <a href="#" class="btn btn-primary btn-sm">Замовити</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

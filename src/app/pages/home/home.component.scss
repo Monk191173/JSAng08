@@ -87,3 +87,29 @@
     background: #fff;
 
 }
+
+.btn-sm {
+    max-height: 44px;
+    font-size: 12px;
+    background-color: $main_color;
+    padding: 14px 10px;
+    line-height: 14px;
+    &:hover{
+        background-color: rgba(0, 110, 255, 0.911);
+    }
+}
+h2 {
+    font-size: 42px;
+    line-height: 1.2em;
+    font-weight: bold;
+}
+.btn-link{
+    display: inline-block;
+    position: relative;
+    font-weight: 700;
+    font-size: 16px;
+    color: #b5d8f7;
+    cursor: pointer;
+    padding-right: 24px;
+    text-decoration: none;
+}

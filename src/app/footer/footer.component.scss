@@ -43,13 +43,15 @@ li {
 
     &-top {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         padding: 20px 0;
         .m-li {
+            max-width: 300px;
             display: flex;
             justify-content: center;
             & a {
+                // width: 60px;
                 display: inline-flex;
                 align-items: flex-end;
             }
@@ -57,7 +59,7 @@ li {
 
         & ul {
 
-            width: 285px;
+            // width: 285px;
             padding-left: 0;
         }
 
@@ -82,7 +84,7 @@ li {
 
     &-bottom {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
         font-size: 14px;
@@ -106,6 +108,7 @@ li {
 .pay-cards {
     display: flex;
     justify-content: center;
+    max-width: 300px;
 
     & &-item+&-item {
         margin-left: 5px;
@@ -179,7 +182,9 @@ li {
 }
 
 .develope {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    // text-align: center;
 
     & a {
         position: relative;

@@ -1,0 +1,116 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Назва товара</span>
+                    <input formControlName="name" name="name" type="text" class="form-control"
+                        aria-describedby="basic-addon1" id="name">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Склад/Опис</span>
+                    <textarea formControlName="description" class="form-control" aria-label="With textarea"
+                        id="description" style="max-height: 160px;"></textarea>
+                </div>
+                <div class="d-flex mb-3">
+                    <div class="input-group" style="max-width: 250px;">
+                        <label class="input-group-text" for="inputGroupSelect01">Категорія</label>
+                        <select class="form-select me-3" id="inputGroupSelect01" formControlName="category"
+                            name="category">
+                            <option value="Роли">Роли</option>
+                            <option value="Сети">Сети</option>
+                            <option value="Напої">Напої</option>
+                            <option value="Соуси">Соуси</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="max-width: 250px;">
+                        <span class="input-group-text" id="basic-addon2">Вага</span>
+                        <input formControlName="weight" name="weight" type="text" class="form-control me-3"
+                            aria-describedby="basic-addon2" id="weight">
+                    </div>
+                    <div class="input-group" style="max-width: 250px;">
+                        <span class="input-group-text" id="basic-addon3">Ціна</span>
+                        <input formControlName="price" name="price" type="number" class="form-control me-3"
+                            aria-describedby="basic-addon3" id="price">
+                    </div>
+                    <div class="input-group" style="max-width: 290px;" *ngIf="valueByControl('category')=='Роли'">
+                        <label class="input-group-text" for="inputGroupSelect02">Підкатегорія</label>
+                        <select class="form-select me-3" id="inputGroupSelect02" formControlName="subcategory"
+                            name="category">
+                            <option value="Філаделфія">Філаделфія</option>
+                            <option value="Каліфорнія">Каліфорнія</option>
+                            <option value="Запечені роли">Запечені роли</option>
+                            <option value="Фірмові">Фірмові</option>
+                            <option value="Макі">Макі</option>
+                            <option value="Преміум">Преміум</option>
+                        </select>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="!isUploaded">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Оберіть файл із зображенням:</label>
+                        <input class="form-control" type="file" id="formFile" (change)="upload($event)">
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                            [style.width.%]="uploadPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </ng-container>
+                <div class="mb-3">
+                    <label for="filePath" class="form-label">Шлях збереженого зображення</label>
+                    <input formControlName="filePath" class="form-control" id="filePath" readonly>
+                    <div class="invalid-feedback">Path is required</div>
+                </div>
+                <ng-container *ngIf="isUploaded">
+                    <img [src]="valueByControl('filePath')" style="max-height: 150px;" class="m-3">
+                    <button type="button" class="btn btn-danger" (click)="deleteImage()">Видалити</button>
+                </ng-container>
+                <button [disabled]="productForm.invalid" type="submit" class="btn btn-success w-100">
+                    {{ editStatus ? 'Зберегти зміни' : 'Додати товар' }}
+                </button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Категорія</th>
+                        <th scope="col">Назва</th>
+                        <th scope="col">Опис</th>
+                        <th scope="col">Вага</th>
+                        <th scope="col">Ціна</th>
+                        <th scope="col">Зображення</th>
+                        <th scope="col">Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of adminProducts">
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.weight }}</td>
+                        <td>{{ product.price }} грн</td>
+                        <!-- <td>{{ product.filePath }}</td> -->
+                        <td>
+                            <img [src]="product.filePath" alt="" height="50px">
+                        </td>
+                        <td>
+                            <button (click)="editProduct(product)" type="button"
+                                class="btn btn-secondary me-2 btn-m">Змінити</button>
+                            <button [disabled]="editStatus" (click)="deleteProduct(product)" type="button"
+                                class="btn btn-danger btn-m">Видалити</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

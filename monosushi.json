@@ -18,5 +18,127 @@
       "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Faction-1.jpg?alt=media&token=ed28f40b-ef8c-4511-b9bd-2cd16323d7fe",
       "id": 3
     }
+  ],
+  "products": [
+    {
+      "category": "Роли",
+      "weight": "250г",
+      "price": 125,
+      "name": "Каліфорнія з крабом – 50%",
+      "description": "Рис, спайсі соус, авокадо, огірок, краб, кунжут",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fkaliforniya-z-krabom-v-kunzhuti.jpg?alt=media&token=48c11aa3-f8a4-4ce3-893c-44a5e606dc05",
+      "id": 1,
+      "subcategory": "Каліфорнія"
+    },
+    {
+      "category": "Роли",
+      "weight": "280г",
+      "price": 100,
+      "name": "Філадельфія з лососем",
+      "description": "Риc, крем сир, огірок, лосось",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Ffiladelfiya-z-lososem.jpg?alt=media&token=6f9a6452-1d0e-47b8-a67c-1b3a2cdd6eac",
+      "id": 2,
+      "subcategory": "Філаделфія"
+    },
+    {
+      "category": "Сети",
+      "subcategory": "Філаделфія",
+      "weight": "1070 г",
+      "price": 1115,
+      "name": "Сет Філадельфія",
+      "description": "Філадельфія: з лососем / в кунжуті / з тунцем / з вугрем",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fset_filad.jpg?alt=media&token=3a8974a2-1282-4016-8d0c-98e9242880cc",
+      "id": 3
+    },
+    {
+      "category": "Сети",
+      "subcategory": "Макі",
+      "weight": "480 г",
+      "price": 630,
+      "name": "Сет Макі",
+      "description": "Макі: з авокадо / з лососем / з огірком / з вугрем",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fset_maki.jpg?alt=media&token=4893c80c-1a45-4249-9fc1-7071f732fe46",
+      "id": 4
+    },
+    {
+      "category": "Напої",
+      "subcategory": null,
+      "weight": "0.33 л",
+      "price": 31,
+      "name": "Coca cola",
+      "description": "Coca cola",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fcola2.jpg?alt=media&token=5ec8f93a-a582-4a03-a765-1d6686bafeed",
+      "id": 5
+    },
+    {
+      "category": "Напої",
+      "subcategory": null,
+      "weight": "1 л",
+      "price": 75,
+      "name": "Сік мультивітамін “Sandora”",
+      "description": "Сік мультивітамін “Sandora”",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fsandora-multyvitamin.png?alt=media&token=cc2cdfc5-3ff2-4ce3-a168-a16090b0f210",
+      "id": 6
+    },
+    {
+      "category": "Соуси",
+      "subcategory": null,
+      "weight": "30 г",
+      "price": 12,
+      "name": "Імбир",
+      "description": "Імбир",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fimbyr.png?alt=media&token=c32ac8da-02f7-4e83-b167-e9d38dd3e16d",
+      "id": 7
+    },
+    {
+      "category": "Соуси",
+      "subcategory": null,
+      "weight": "25 г",
+      "price": 12,
+      "name": "Васабі",
+      "description": "Васабі",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2Fvasabi.png?alt=media&token=55f88b95-237a-4de3-80c3-e343d1374dcf",
+      "id": 8
+    },
+    {
+      "category": "Роли",
+      "subcategory": "Запечені роли",
+      "weight": "330г",
+      "price": 334,
+      "name": "Запечений сирний з креветкою",
+      "description": "Рис, крем сир, салат айсберг, креветка, кунжут, сирний соус, унагі соус",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2F2.-zapechenyj-syrnyj-z-los.jpg?alt=media&token=2040fd3a-c943-4847-a5b0-b912b539ef9b",
+      "id": 9
+    },
+    {
+      "category": "Роли",
+      "subcategory": "Фірмові",
+      "weight": "240 г",
+      "price": 194,
+      "name": "Сирний",
+      "description": "Рис, крем сир, фета, кунжут",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2F01.-syrnyj.jpg?alt=media&token=d69ddae3-40c1-4fb7-84cd-b859e49520f8",
+      "id": 10
+    },
+    {
+      "category": "Роли",
+      "subcategory": "Макі",
+      "weight": "120г",
+      "price": 187,
+      "name": "Макі з лососем",
+      "description": "Рис, норі, лосось",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2F3.-maki-z-lososem-1.jpg?alt=media&token=6671706b-d340-4c0a-b2e3-01c39e47247e",
+      "id": 11
+    },
+    {
+      "category": "Роли",
+      "subcategory": "Преміум",
+      "weight": "370г",
+      "price": 389,
+      "name": "Мексиканський",
+      "description": "Рис, крем сир, креветка, огірок, кунжут, лосось, гуакамоле, шрірача",
+      "filePath": "https://firebasestorage.googleapis.com/v0/b/monosushi-be507.appspot.com/o/images%2F4.-meksykanskyj.jpg?alt=media&token=de332e54-f6fc-4cc6-a104-714f023811bd",
+      "id": 12
+    }
   ]
 }

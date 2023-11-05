@@ -48,12 +48,18 @@ nav {
     }
 }
 
-li a[class^="dropdown"] {
-    display: block !important;
-    width: 96% !important;
-    height: 30px !important;
-    line-height: 15px;
+ul[class^="dropdown"] {
+    width: 180px;
     margin: 3px;
+
+
+    & li a {
+        display: block !important;
+        width: 98% !important;
+        height: 30px !important;
+        line-height: 15px;
+        // margin: 3px;
+    }
 }
 
 .logo {
@@ -226,4 +232,14 @@ li a[class^="dropdown"] {
         }
     }
 
+
+    @media screen and (max-width: 1210px) {
+        nav,
+        #navbarNav,
+        .nav,
+        .m-con {
+            
+            height: 220px;
+        }
+    }
 }

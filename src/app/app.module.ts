@@ -23,6 +23,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminActionsComponent } from './admin/admin-actions/admin-actions.component';
 import { ActionInfoComponent } from './pages/actions/action-info/action-info.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products/admin-products.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ActionInfoComponent } from './pages/actions/action-info/action-info.com
     FooterComponent,
     AdminComponent,
     AdminActionsComponent,
-    ActionInfoComponent
+    ActionInfoComponent,
+    AdminProductsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

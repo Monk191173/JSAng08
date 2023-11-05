@@ -1,21 +1,27 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-4">
+        <div class="col-12">
             <form [formGroup]="actionForm" (ngSubmit)="addAction()">
-                <div class="mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Назва акції</span>
+                    <input formControlName="name" name="name" type="text" class="form-control"
+                        aria-describedby="basic-addon1" id="name">
+                </div>
+                <!-- <div class="mb-3">
                     <label for="name" class="form-label">Назва</label>
                     <input formControlName="name" name="name" type="text" class="form-control" id="name">
+                </div> -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Опис акції</span>
+                    <textarea formControlName="description" class="form-control" aria-label="With textarea"
+                        id="description" style="max-height: 160px;"></textarea>
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="description" class="form-label">Опис</label>
                     <textarea formControlName="description" class="form-control" id="description"></textarea>
                     <div class="invalid-feedback">Description is required</div>
-                </div>
-                <div class="mb-3">
-                    <label for="filePath" class="form-label">Шлях збереженого зображення</label>
-                    <input formControlName="filePath" class="form-control" id="filePath" readonly>
-                    <div class="invalid-feedback">Path is required</div>
-                </div>
+                </div> -->
+
                 <ng-container *ngIf="!isUploaded">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Оберіть файл із зображенням:</label>
@@ -26,40 +32,48 @@
                             [style.width.%]="uploadPercent" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </ng-container>
+                <div class="mb-3">
+                    <label for="filePath" class="form-label">Шлях збереженого зображення</label>
+                    <input formControlName="filePath" class="form-control" id="filePath" readonly>
+                    <div class="invalid-feedback">Path is required</div>
+                </div>
                 <ng-container *ngIf="isUploaded">
-                    <img [src]="valueByControl('filePath')" alt="">
-                    <button type="button" class="btn btn-danger" (click)="deleteImage()">delete</button>
+                    <img [src]="valueByControl('filePath')" alt="" style="max-height:150px" class="m-3">
+                    <button type="button" class="btn btn-danger" (click)="deleteImage()">Видалити</button>
                 </ng-container>
                 <button [disabled]="actionForm.invalid" type="submit" class="btn btn-success w-100">
-                    {{ editStatus ? 'Save' : 'Add' }}
+                    {{ editStatus ? 'Зберегти зміни' : 'Додати акцію' }}
                 </button>
             </form>
         </div>
-        <div class="col-xl-8">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Path</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">№</th>
+                        <th scope="col">Назва</th>
+                        <th scope="col">Опис</th>
+                        <th scope="col">Зображення</th>
+                        <th scope="col">Дії</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let action of adminActions">
                         <td>{{ action.id }}</td>
                         <td>{{ action.name }}</td>
-                        <td>{{ action.filePath }}</td>
+                        <td style="max-width: 300px;">{{ action.description }}</td>
                         <td>
-                            <img [src]="action.filePath" alt="" height="50px">
+                            <img [src]="action.filePath" alt="" height="50px" >
                         </td>
-                        <td>
-                            <button (click)="editAction(action)" type="button"
-                                class="btn btn-secondary me-2 btn-m">Edit</button>
-                            <button [disabled]="editStatus" (click)="deleteAction(action)" type="button"
-                                class="btn btn-danger btn-m">Delete</button>
-                        </td>
+                            <td>
+                                <button (click)="editAction(action)" type="button"
+                                    class="btn btn-secondary me-2 btn-m">Змінити</button>
+                                <button [disabled]="editStatus" (click)="deleteAction(action)" type="button"
+                                    class="btn btn-danger btn-m">Видалити</button>
+                            </td>
                     </tr>
                 </tbody>
             </table>

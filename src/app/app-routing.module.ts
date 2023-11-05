@@ -12,6 +12,7 @@ import { DostavkaTaOplataComponent } from './pages/dostavka-ta-oplata/dostavka-t
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AdminActionsComponent } from './admin/admin-actions/admin-actions.component';
 import { ActionInfoComponent } from './pages/actions/action-info/action-info.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products/admin-products.component';
 
 const routes: Routes = [  
 {path:'',component:HomeComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
 {path:'actions',component:ActionsComponent},
 {path:'action/:id', component: ActionInfoComponent },
 {path:'admin',component:AdminComponent,children:[
-  {path:'admin-actions',component:AdminActionsComponent}
+  {path:'admin-actions',component:AdminActionsComponent},
+  {path:'admin-products',component:AdminProductsComponent}
 ]},
 {path:'checkout',component:CheckoutComponent},
 {path:'products/roli',component:RoliComponent},
