@@ -22,12 +22,13 @@ export class ProductsService {
     return this.http.get<IProductResponse[]>(this.api.products);
   }
 
-  create(action: IProductRequest): Observable<IProductResponse> {
-    return this.http.post<IProductResponse>(this.api.products, action);
+  create(product: IProductRequest): Observable<IProductResponse> {
+    product.count=1;
+    return this.http.post<IProductResponse>(this.api.products, product);
   }
 
-  update(category: IProductRequest, id: number): Observable<IProductResponse> {
-    return this.http.patch<IProductResponse>(`${this.api.products}/${id}`, category);
+  update(product: IProductRequest, id: number): Observable<IProductResponse> {
+    return this.http.patch<IProductResponse>(`${this.api.products}/${id}`, product);
   }
 
   delete(id: number): Observable<void> {
