@@ -90,19 +90,23 @@
 
                 <li class="nav-item ">
                     <div class="basket">
-                        <a href="">
+                        <a (click)="basketClick()">
                             <i>
                                 <img src="../../assets/images/basket.svg">
-                                <span>0</span>
+                                <span>{{total_count}}</span>
                             </i>
                         </a>
                         <div class="price">
-                            <b>0 </b>
+                            <b>{{total}} </b>
                             <span>грн</span>
                         </div>
-
+                        <div class="basket-menu d-flex rounded-3" *ngIf="basketOpen">
+                            <button class="btn">Оплатити</button>
+                            <button class="btn" (click)="clearBasket()">Очистити</button>
+                        </div>
                     </div>
                 </li>
+
                 <!-- </div> -->
             </ul>
         </div>

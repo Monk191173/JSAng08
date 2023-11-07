@@ -13,11 +13,18 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AdminActionsComponent } from './admin/admin-actions/admin-actions.component';
 import { ActionInfoComponent } from './pages/actions/action-info/action-info.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products/admin-products.component';
+import { actionResolver } from './shared/resolvers/action.resolver';
+import { productInfoResolver } from './shared/resolvers/product-info.resolver';
+import { InfoProductComponent } from './products/info-product/info-product.component';
 
 const routes: Routes = [  
 {path:'',component:HomeComponent},
-{path:'home',component:HomeComponent},
-{path:'actions',component:ActionsComponent},
+{path:'home',component:HomeComponent,resolve:{
+product:productInfoResolver
+}},
+{path:'actions',component:ActionsComponent,resolve:{
+  action:actionResolver
+}},
 {path:'action/:id', component: ActionInfoComponent },
 {path:'admin',component:AdminComponent,children:[
   {path:'admin-actions',component:AdminActionsComponent},
@@ -28,6 +35,9 @@ const routes: Routes = [
 {path:'products/setu',component:SetuComponent},
 {path:'products/napoyi',component:NapoyiComponent},
 {path:'products/sousi',component:SousiComponent},
+{path:'product/:id',component:InfoProductComponent,resolve:{
+  product:productInfoResolver  
+}},
 {path:'dostavka-ta-oplata',component:DostavkaTaOplataComponent},
 {path:'about-us',component:AboutUsComponent},
 ];

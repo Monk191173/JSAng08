@@ -25,6 +25,8 @@ import { AdminActionsComponent } from './admin/admin-actions/admin-actions.compo
 import { ActionInfoComponent } from './pages/actions/action-info/action-info.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products/admin-products.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { ShowProductComponent } from './products/show-product/show-product.component';
+import { InfoProductComponent } from './products/info-product/info-product.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     AdminActionsComponent,
     ActionInfoComponent,
     AdminProductsComponent,
-    FilterPipe
+    FilterPipe,
+    ShowProductComponent,
+    InfoProductComponent
   ],
   imports: [
     BrowserModule,

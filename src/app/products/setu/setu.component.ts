@@ -8,21 +8,24 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./setu.component.scss']
 })
 export class SetuComponent {
-  public product:Array<IProductResponse>=[];
+  // public product:Array<IProductResponse>=[];
   // public subCategoryName='All';
   constructor(private prodService:ProductsService){}
   
   ngOnInit():void{
-    this.loadProducts()
+    this.setSubCat('All');
+    // this.loadProducts()
   }
   
-  loadProducts(){
-    this.prodService.getAll().subscribe(data=>{
-      this.product=data
-    })
-  }
-  
-  // setSubCat(subCat:string):void{
-  //   this.subCategoryName=subCat;
+  // loadProducts(){
+  //   this.prodService.getAll().subscribe(data=>{
+  //     this.product=data
+  //   })
   // }
+  
+  setSubCat(subCat:string):void{
+    this.prodService.CategoryName='Сети';
+    this.prodService.subCategoryName=subCat;
+    this.prodService.changeProductGroup.next(true);
+  }
 }

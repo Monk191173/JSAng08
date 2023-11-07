@@ -1,0 +1,47 @@
+<div class="mb-5">
+    <a *ngFor="let rou of routes" [routerLink]="rou.link">{{rou.name}} ·<span>&nbsp;</span> </a> <span
+        class="last">{{name}}</span>
+</div>
+<div class="container-fluid d-flex justify-content-center ">
+    <div class="card mb-3 d-flex align-items-center" style="max-width: 640px;min-height: 350px;">
+        <div class="row g-0 h-100">
+            <div class="col d-flex align-content-center  m-1">
+                <img [src]="filePath" class="img-fluid" style="object-fit:contain;">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h1 class="card-title fw-bold mb-3">{{ name }}</h1>
+                    <div class="d-flex justify-content-start">
+                        <span>Склад:</span>
+                        <p class="ms-1 card-text">{{description}}</p>
+                    </div>
+                    <div class="d-flex justify-content-start mb-5">
+                        <span>Вага:</span>
+                        <p class="ms-1 card-text">{{weight}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <div>
+                            <p class="m-0"><strong>{{ price }}</strong> грн</p>
+                        </div>
+                        <div class="btn-group p-1" role="group" aria-label="Basic outlined example">
+                            <button (click)="productCount(product, false)" type="button"
+                                class="btn btn-outline-secondary p-1">-</button>
+                            <input type="text" class="btn btn-outline-secondary p-1" style="max-width: 40px;"
+                                [value]="product.count" readonly>
+                            <button (click)="productCount(product, true)" type="button"
+                                class="btn btn-outline-secondary p-1">+</button>
+                        </div>
+                        <div class="fs-6">
+                            <a (click)="addToBasket(product)" class="btn btn-primary btn-sm">Замовити</a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="card-title text-danger" *ngIf="product.count>1">
+                        {{ product.price * product.count }} грн
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

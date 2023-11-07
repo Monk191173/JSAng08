@@ -145,7 +145,7 @@
         </div>
 
     </div>
-    <ng-template #showProduct>
+    <!-- <ng-template #showProduct>
         <div class="row d-flex justify-content-between ">
             <div class="col d-flex justify-content-center"
                 *ngFor="let prod of product | filter:'Роли':subCategoryName ">
@@ -175,7 +175,10 @@
                 </div>
             </div>
         </div>
-    </ng-template>
+    </ng-template> -->
+    <ng-template #showProduct>
+    <app-show-product></app-show-product>
+</ng-template>
 </div>
 
 <div class="spacer"></div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IProductRequest,IProductResponse } from '../../interfaces/products';
 
 @Injectable({
@@ -11,6 +11,10 @@ export class ProductsService {
   private url = environment.BACKEND_URL;
   private api = { products: `${this.url}/products` };
   public curActionId:number=-1;
+  public changeProductGroup=new Subject<boolean>();
+  public changeBasket=new Subject<boolean>();
+  public CategoryName='';
+  public subCategoryName='';
 
   constructor(private http: HttpClient) { }
 

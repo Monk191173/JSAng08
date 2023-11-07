@@ -5,7 +5,8 @@ export interface IProductRequest {
     description:string,
     weight:string,
     price:number,
-    filePath:string
+    filePath:string,
+    count: number;
 }
 export interface IProductResponse extends IProductRequest {
     id:number|string;

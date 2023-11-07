@@ -8,16 +8,23 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./sousi.component.scss']
 })
 export class SousiComponent {
-  public product:Array<IProductResponse>=[];
+  // public product:Array<IProductResponse>=[];
   constructor(private prodService:ProductsService){}
   
   ngOnInit():void{
-    this.loadProducts()
+    this.setSubCat('All');
+    // this.loadProducts()
   }
   
-  loadProducts(){
-    this.prodService.getAll().subscribe(data=>{
-      this.product=data
-    })
+  // loadProducts(){
+  //   this.prodService.getAll().subscribe(data=>{
+  //     this.product=data
+  //   })
+  // }
+
+  setSubCat(subCat:string):void{
+    this.prodService.CategoryName='Соуси';
+    this.prodService.subCategoryName=subCat;
+    this.prodService.changeProductGroup.next(true);
   }
 }
