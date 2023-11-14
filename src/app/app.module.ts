@@ -27,6 +27,11 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products/ad
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { ShowProductComponent } from './products/show-product/show-product.component';
 import { InfoProductComponent } from './products/info-product/info-product.component';
+import { LoginComponent } from './pages/login/login.component';
+import { CabinetComponent } from './pages/cabinet/cabinet.component';
+import { PersonalComponent } from './pages/cabinet/personal/personal.component';
+import { HistoryComponent } from './pages/cabinet/history/history.component';
+import { PasswordComponent } from './pages/cabinet/password/password.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { InfoProductComponent } from './products/info-product/info-product.compo
     AdminProductsComponent,
     FilterPipe,
     ShowProductComponent,
-    InfoProductComponent
+    InfoProductComponent,
+    LoginComponent,
+    CabinetComponent,
+    PersonalComponent,
+    HistoryComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,

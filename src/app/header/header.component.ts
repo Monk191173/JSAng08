@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Storage,ref,getDownloadURL } from '@angular/fire/storage';
+import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { IProductResponse } from '../shared/interfaces/products';
 import { ProductsService } from '../shared/services/products/products.service';
+import { UsersService } from '../shared/services/users/users.service';
 
 @Component({
   selector: 'app-header',
@@ -12,22 +13,33 @@ export class HeaderComponent {
   // public linkAct='';
   public total = 0;
   public total_count = 0;
-  private basket: Array<IProductResponse> = [];
-  public basketOpen:boolean=false;
+  public basket: Array<IProductResponse> = [];
+  public basketOpen: boolean = false;
+  public urlAdm = '../../assets/images/user.svg';
+  public roleRoute = 'login';
   constructor(
-    private storage: Storage,
-    public prodService:ProductsService
-    ){ 
+    // private storage: Storage,
+    public prodService: ProductsService,
+    public userService: UsersService
+  ) {
     // const refAct=ref(this.storage,'images/actions.svg');
-    
+
     // getDownloadURL(refAct).then(data=>this.linkAct=data);
   }
-  ngOnInit():void{
+  ngOnInit(): void {
     this.loadBasket();
     this.updateBasket();
+    if (localStorage.length > 0) {
+      this.urlAdm = '../../assets/images/user_out.svg';
+      this.roleRoute = (JSON.parse(localStorage.getItem('curUser') as string).role == 'ADMIN') ? 'admin' : 'cabinet';
+    }
+    this.userService.userLogon.subscribe((data) => {
+      if (data) { this.urlAdm = '../../assets/images/user_out.svg'; this.roleRoute = (JSON.parse(localStorage.getItem('curUser') as string).role == 'ADMIN') ? 'admin' : 'cabinet' }
+      else { this.urlAdm = '../../assets/images/user.svg'; localStorage.clear(); this.roleRoute = 'login' }
+    })
   }
   loadBasket(): void {
-    if(localStorage.length > 0 && localStorage.getItem('basket')){
+    if (localStorage.length > 0 && localStorage.getItem('basket')) {
       this.basket = JSON.parse(localStorage.getItem('basket') as string);
     }
     this.getTotalPrice();
@@ -39,26 +51,34 @@ export class HeaderComponent {
       .reduce((total: number, prod: IProductResponse) => total + prod.count * prod.price, 0);
   }
 
-  getTotalCount():void{
+  getTotalCount(): void {
     this.total_count = this.basket
       .reduce((total: number, prod: IProductResponse) => total + prod.count, 0);
   }
 
   updateBasket(): void {
     this.prodService.changeBasket.subscribe(() => {
+      this.basket=[];
       this.loadBasket();
     })
   }
 
-  basketClick():void{
-    this.basketOpen=!this.basketOpen
+  basketClick(): void {
+    this.basketOpen = !this.basketOpen
   }
 
-  clearBasket():void{
-    localStorage.clear();
-    this.basket=[];
+  clearBasket(): void {
+    localStorage.removeItem('basket');
+    this.basket = [];
     this.loadBasket();
-    this.basketOpen=false
+    this.basketOpen = false
+  }
+
+  deleteProduct(product: IProductResponse): void {
+    this.basket.splice(this.basket.indexOf(product), 1);
+    localStorage.removeItem('basket');
+    localStorage.setItem('basket',JSON.stringify(this.basket))
+    this.loadBasket();
   }
 
 }
