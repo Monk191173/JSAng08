@@ -23,6 +23,7 @@ import { PersonalComponent } from './pages/cabinet/personal/personal.component';
 import { HistoryComponent } from './pages/cabinet/history/history.component';
 import { PasswordComponent } from './pages/cabinet/password/password.component';
 import { usersResolver } from './shared/resolvers/users.resolver';
+import { LoginUserComponent } from './pages/login-user/login-user.component';
 
 const routes: Routes = [  
 {path:'',component:HomeComponent},
@@ -37,7 +38,8 @@ product:productInfoResolver
   {path:'admin-actions',component:AdminActionsComponent},
   {path:'admin-products',component:AdminProductsComponent}
 ]},
-{path:'login',component:LoginComponent},
+{path:'login',component:LoginUserComponent},
+{path:'loginadmin',component:LoginComponent},
 {path:'checkout',component:CheckoutComponent},
 {path:'products/roli',component:RoliComponent},
 {path:'products/setu',component:SetuComponent},

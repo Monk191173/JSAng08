@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IActionResponse } from 'src/app/shared/interfaces/actions';
 import { ActionService } from 'src/app/shared/services/actions/action.service';
 import { ActivatedRoute } from '@angular/router';
+import { Firestore, doc, docData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-action-info',
@@ -13,9 +14,11 @@ export class ActionInfoComponent {
   public filePath='';
   public name='';
   public description='';
+  
 
   constructor(
     private actionService: ActionService,
+    private afs: Firestore,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -24,12 +27,19 @@ export class ActionInfoComponent {
   }
 
   getOneAction(): void {
-    const ACTION_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.actionService.getOne(ACTION_ID).subscribe(data => {
-      this.action = data;
-      this.filePath=this.action.filePath;
-      this.name=this.action.name;
-      this.description=this.action.description
-    })
+    const ACTION_ID = String(this.activatedRoute.snapshot.paramMap.get('id'));
+    console.log(ACTION_ID);
+    
+docData(doc(this.afs,'actions',ACTION_ID)).subscribe(data=>{
+  this.filePath=data!['filePath'];
+  this.name=data!['name'];
+  this.description=data!['description']
+})
+    // this.actionService.getOne(ACTION_ID).subscribe(data => {
+    //   this.action = data;
+    //   this.filePath=this.action.filePath;
+    //   this.name=this.action.name;
+    //   this.description=this.action.description
+    // })
   }
 }

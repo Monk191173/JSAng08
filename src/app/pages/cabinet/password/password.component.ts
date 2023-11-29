@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Auth, UserCredential, signInWithEmailAndPassword, updatePassword } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IUserRequest, IUserResponse } from 'src/app/shared/interfaces/users';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
@@ -11,13 +13,15 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
 })
 export class PasswordComponent {
   public passForm!: FormGroup;
-  private Users!: IUserResponse[];
+  // private Users!: IUserResponse[];
   private curUser!: IUserRequest;
   constructor(
     private userService: UsersService,
     private fb: FormBuilder,
-    private router: Router
-  ){}
+    private auth: Auth,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -25,9 +29,7 @@ export class PasswordComponent {
   }
 
   getUsers(): void {
-    this.userService.getAll().subscribe(data => {
-      this.Users = data
-    });
+    this.curUser = JSON.parse(localStorage.getItem('curUser') as string);
   }
 
   initPassForm(): void {
@@ -38,19 +40,41 @@ export class PasswordComponent {
     })
   }
 
-  signIn():void{
-    let oldPas=this.passForm.get('oldPass')?.value;
-    let curUser=this.Users.filter(us=>us.email==JSON.parse(localStorage.getItem('curUser') as string).email);
-    if(curUser[0].password!=oldPas||oldPas==''||oldPas==null){alert('Введено некоректні дані. Помилка в старому паролі !!!!'); return}
-    
-    let newPas=this.passForm.get('newPass')?.value;
-    let pass=this.passForm.get('password')?.value;
-    if (pass!=newPas||newPas==''||pass==''||newPas==null||pass==null){alert('Введено некоректні дані. Помилка в новому паролі !!!!'); return}
-
-    curUser[0].password=newPas;
-    this.userService.update(curUser[0],curUser[0].id).subscribe(()=>{
-      alert('Успішно змінено !!!');
-      this.router.navigate(['login'])
-    });
+  async login(email: string, password: string): Promise<UserCredential> {
+    const cred = await signInWithEmailAndPassword(this.auth, email, password);
+    return cred
   }
+
+  async updUser(password: string): Promise<any> {
+    const user = this.auth.currentUser;
+    return await updatePassword(user!, password);
+  }
+
+  signIn(): void {
+    let oldPas = this.passForm.get('oldPass')?.value;
+    let newPas = this.passForm.get('newPass')?.value;
+    let pass = this.passForm.get('password')?.value;
+
+    this.login(this.curUser.email, oldPas).then(() => {
+      if (pass != newPas) {
+        this.toastr.error('Введено некоректні дані. Помилка в новому паролі !!!!');
+      }
+      else {
+        this.updUser(pass).then(() => {
+          this.toastr.success('Успішно змінено !!!');
+          this.router.navigate(['login'])
+        }).catch(e => {
+          this.toastr.error('Введено некоректні дані. Помилка в новому паролі !!!!');
+          this.toastr.error(e.code);
+        })
+      }
+    }).catch(e => {
+      this.toastr.error('Введено некоректні дані. Помилка в старому паролі !!!!');
+      this.toastr.success(e.code);
+    });
+
+  }
+
+
+
 }

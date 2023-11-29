@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { deleteObject, getDownloadURL, percentage, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 import { ActionService } from 'src/app/shared/services/actions/action.service';
 import { IActionResponse } from 'src/app/shared/interfaces/actions';
+import { DocumentData, Firestore, QuerySnapshot, addDoc, collection, deleteDoc, doc, docData, getDocs, query, setDoc } from '@angular/fire/firestore';
 
 
 @Component({
@@ -17,11 +18,18 @@ export class AdminActionsComponent {
   public uploadPercent!: number;
   public isUploaded = false;
   // public linkAct:string='';
-  private currentActionId = 0;
+  private currentActionId = '';
+  private tmpAction = {
+    name: '',
+    description: '',
+    filePath: '',
+    id: ''
+  }
 
   constructor(
     private fb: FormBuilder,
     private actionService: ActionService,
+    private afs: Firestore,
     private storage: Storage
   ) { }
 
@@ -73,20 +81,50 @@ export class AdminActionsComponent {
   }
 
   loadActions(): void {
-    this.actionService.getAll().subscribe(data => {
-      this.adminActions = data;
+    this.adminActions = [];
+    this.getActions().then(data => {
+      data.docs.forEach(doc => {
+        this.tmpAction.description = doc.get('description');
+        this.tmpAction.filePath = doc.get('filePath');
+        this.tmpAction.name = doc.get('name');
+        this.tmpAction.id = doc.id;
+        this.adminActions.push(this.tmpAction)
+        this.tmpAction = {
+          name: '',
+          description: '',
+          filePath: '',
+          id: ''
+        }
+      })
     })
+  }
+
+  async getActions(): Promise<QuerySnapshot<DocumentData>> {
+    // this.actionService.getAll().subscribe(data => {
+    //   this.adminActions = data;
+    // })
+    const q = query(collection(this.afs, "actions"));
+    const data = await getDocs(q);
+    return data
   }
 
   addAction(): void {
     if (this.editStatus) {
-      this.actionService.update(this.actionForm.value, this.currentActionId).subscribe(() => {
+      // this.actionService.update(this.actionForm.value, this.currentActionId).subscribe(() => {
+      //   this.loadActions();
+      // })
+      setDoc(doc(this.afs, 'actions', this.currentActionId), this.actionForm.value).then(() => {
         this.loadActions();
       })
+
     } else {
-      this.actionService.create(this.actionForm.value).subscribe(() => {
+      // this.actionService.create(this.actionForm.value).subscribe(() => {
+      //   this.loadActions();
+      // })
+      addDoc(collection(this.afs, "actions"), this.actionForm.value).then(() => {
         this.loadActions();
       })
+
     }
     this.editStatus = false;
     this.actionForm.reset();
@@ -105,8 +143,11 @@ export class AdminActionsComponent {
     this.isUploaded = true;
   }
 
-  deleteAction(category: IActionResponse): void {
-    this.actionService.delete(category.id).subscribe(() => {
+  deleteAction(action: IActionResponse): void {
+    // this.actionService.delete(action.id).subscribe(() => {
+    //   this.loadActions();
+    // })
+    deleteDoc(doc(this.afs, 'actions', action.id)).then(() => {
       this.loadActions();
     })
   }

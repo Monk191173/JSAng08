@@ -1,0 +1,57 @@
+<div class="container-fluid" color="accent">
+    <div class="row">
+        <div class="col m-auto" style="max-width: 500px;">
+            <form [formGroup]="usersForm" (ngSubmit)="signIn()">
+                <div *ngIf="!regUser" class="text-center">
+                    <h3>Введіть дані для входу, або зареєструйтесь...</h3>
+                </div>
+                <div class="mb-3 text-center">
+                    <h6>(Поля позначені * обов'язкові до заповнення)</h6>
+                </div>
+                <div *ngIf="regUser" class="mb-3 text-center">
+                    <h4>Новий акаунт...</h4>
+                </div>
+                <div class="mb-3" *ngIf="regUser">
+                    <!-- <label for="userName" class="form-label">Ваше ім'я</label>
+                    <input formControlName="name" type="text" class="form-control" id="userName"> -->
+                    <mat-form-field>
+                        <mat-label>Ваше ім'я</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="userMail" class="form-label">Email address</label>
+                    <input formControlName="email" type="email" class="form-control" id="userMail">
+                    <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" Class="text-danger">Невірний
+                        email</span>
+                </div> -->
+                <div class="mb-3">
+                    <mat-form-field>
+                        <mat-label>Введіть email</mat-label>
+                        <input matInput placeholder="pat@gmail.com" formControlName="email" [formControl]="e_mail">
+                        <!-- @if (e_mail.invalid)  -->
+                        <mat-error *ngIf="_email.invalid">{{getErrorMessage()}}</mat-error>
+                        
+                    </mat-form-field>
+                </div>
+                <div class="mb-3">
+                    <!-- <label for="userPassword" class="form-label">Password</label>
+                    <input formControlName="password" type="password" class="form-control" id="userPassword"> -->
+
+                    <mat-form-field>
+                        <mat-label>Введіть пароль</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <button mat-raised-button type="submit" color="accent"
+                        [disabled]=usersForm.invalid>{{regUser?'Зберегти':'Увійти'}}</button>
+                    <button mat-raised-button color="accent" (click)="goReg()" *ngIf="!regUser">Зареєструватись</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

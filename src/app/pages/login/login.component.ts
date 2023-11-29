@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUserRequest, IUserResponse } from 'src/app/shared/interfaces/users';
+import { ToastrService } from 'ngx-toastr';
+// import { IUserRequest, IUserResponse } from 'src/app/shared/interfaces/users';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 
@@ -11,83 +14,91 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  public regUser = false;
-  private Users!: IUserResponse[];
-  private newUser!: IUserRequest;
+  // public regUser = false;
+  // private Users!: IUserResponse[];
+  // private newUser!: IUserRequest;
   public usersForm!: FormGroup;
   private curUser = {
+    uid: '',
     email: '',
-    role: ''
+    role: '',
+    firstName: ''
   };
 
   constructor(
-    private prodService:ProductsService,
+    private prodService: ProductsService,
     private userService: UsersService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private auth: Auth,
+    private toastr: ToastrService,
+    private afs: Firestore
   ) { }
+
+  async login(email: string, password: string): Promise<UserCredential> {
+    const cred = await signInWithEmailAndPassword(this.auth, email, password);
+    return cred
+  }
+  async signUp(email: string, password: string): Promise<UserCredential> {
+    const cred = await createUserWithEmailAndPassword(this.auth, email, password);
+    return cred
+  }
+
 
   ngOnInit(): void {
     localStorage.clear();
-    this.getUsers();
     this.initUsersForm();
     this.userService.userLogon.next(false);
     this.prodService.changeBasket.next(true);
-  }
-
-  getUsers(): void {
-    this.userService.getAll().subscribe(data => {
-      this.Users = data
-    });
   }
 
   initUsersForm(): void {
     this.usersForm = this.fb.group({
       name: [null],
       email: [null, Validators.pattern(/^[\w-\.]+@{1}[a-zA-Z]+\.{1}[a-zA-Z]{2,}$/)
-    ],
+      ],
       password: [null, Validators.required]
     })
   }
 
-  goReg(): void {
-    this.regUser = true
-  }
+  // goReg(): void {
+  //   this.regUser = true
+  // }
 
   signIn(): void {
     let em = this.usersForm.get('email')?.value;
     let pas = this.usersForm.get('password')?.value;
-    if (this.regUser) {
-      let nam = this.usersForm.get('name')?.value;
-      if (nam == '' || nam == ' ' || nam == null) { alert('Помилка в імені !!!'); return }
-      // if (em == '' || em == ' ' || em == null) { alert('Помилка в email !!!'); return }
-      if (pas == '' || pas == null) { alert('Помилка в паролі !!!'); return }
-      this.newUser = this.usersForm.value;
-      this.newUser.role = 'USER';
-      let asUs = this.Users.some(el => el.email === em);
-      if (asUs) alert('Такий email вже зареєстровано !!');
-      else this.userService.create(this.newUser).subscribe({})
-      this.getUsers();
-      this.regUser = false
-    }
-    else {
-      // if (em == '' || em == ' ' || em == null) { alert('Помилка в email !!!'); return }
-      if (pas == '' || pas == null) { alert('Помилка в паролі !!!'); return }
-      let asUs = this.Users.filter(el => (el.email == em && el.password == pas));
-      if (asUs.length == 0) alert('Невірний пароль або email !!')
-      else {
-        this.newUser = this.usersForm.value;
-        this.curUser.email = this.newUser.email;
-        this.curUser.role = asUs[0].role;
-        localStorage.setItem("curUser", JSON.stringify(this.curUser));
-        if (this.curUser.role == 'ADMIN') this.router.navigate(['admin'])
-        else if (this.curUser.role == 'USER') this.router.navigate(['cabinet']);
-        this.userService.userLogon.next(true);
-      }
-    }
+    // const user = {
+    //   role: 'USER',
+    //   email: '',
+    //   firstName: ''
+    // }
+
+      if (pas == '' || pas == null) { this.toastr.error('Помилка в паролі !!!'); return }
+      this.login(em, pas).then(dataUs => {
+        docData(doc(this.afs, 'users', dataUs.user.uid)).subscribe(data => {
+          this.curUser.role = data!['role'];
+          if (this.curUser.role == 'ADMIN') {
+          this.curUser.email =dataUs.user.providerData[0].uid;
+          this.curUser.uid = dataUs.user.uid;
+          // this.curUser.firstName = data!['firstName'];
+          localStorage.setItem("curUser", JSON.stringify(this.curUser));
+          this.router.navigate(['admin']);
+          this.userService.userLogon.next(true);
+          this.toastr.success('Вітаємо !!');
+          }
+          else {
+            this.toastr.warning('Натисніть на користувача біля корзини !!!');
+            this.router.navigate(['']);
+          }
+        })
+      }).catch(e => {
+        this.toastr.error(e.code)
+      })
+
   }
 
-  get _email(){
+  get _email() {
     return this.usersForm.get('email');
   }
 

@@ -4,5 +4,5 @@ export interface IActionRequest {
     filePath:string
 }
 export interface IActionResponse extends IActionRequest {
-    id:number
+    id:string
 }

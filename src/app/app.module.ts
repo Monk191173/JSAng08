@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,6 +10,8 @@ import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 import { ActionsComponent } from './pages/actions/actions.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
@@ -32,6 +36,9 @@ import { CabinetComponent } from './pages/cabinet/cabinet.component';
 import { PersonalComponent } from './pages/cabinet/personal/personal.component';
 import { HistoryComponent } from './pages/cabinet/history/history.component';
 import { PasswordComponent } from './pages/cabinet/password/password.component';
+import { SharedModule } from './shared/shared-modele';
+import { LoginUserComponent } from './pages/login-user/login-user.component';
+
 
 @NgModule({
   declarations: [
@@ -58,14 +65,21 @@ import { PasswordComponent } from './pages/cabinet/password/password.component';
     CabinetComponent,
     PersonalComponent,
     HistoryComponent,
-    PasswordComponent
+    PasswordComponent,
+    LoginUserComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,ReactiveFormsModule,HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideFirestore(() => getFirestore()),
+    provideAuth(()=>getAuth()),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

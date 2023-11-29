@@ -2,23 +2,25 @@
     <div class="row">
         <div class="col m-auto" style="max-width: 500px;">
             <form [formGroup]="usersForm" (ngSubmit)="signIn()">
-                <div class="mb-3" *ngIf="regUser">
-                    <label for="userName" class="form-label">Ваше ім'я</label>
-                    <input formControlName="name" type="text" class="form-control" id="userName">
+                <div class="mb-3 text-center">
+                    <h4>Введіть дані для входу...</h4>
                 </div>
+
                 <div class="mb-3">
                     <label for="userMail" class="form-label">Email address</label>
                     <input formControlName="email" type="email" class="form-control" id="userMail">
-                    <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" Class="text-danger">Невірний email</span>
+                    <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" Class="text-danger">Невірний
+                        email</span>
                 </div>
                 <div class="mb-3">
                     <label for="userPassword" class="form-label">Password</label>
                     <input formControlName="password" type="password" class="form-control" id="userPassword">
                 </div>
                 <div class="d-flex justify-content-between mb-3">
-                <button type="submit" class="btn btn-primary" [disabled]=usersForm.invalid>{{regUser?'Зберегти':'Увійти'}}</button>
-                <button class="btn btn-primary" (click)="goReg()" *ngIf="!regUser">Зареєструватись</button>
-            </div>
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]=usersForm.invalid>Увійти</button>
+                    <!-- <button class="btn btn-primary" (click)="goReg()" *ngIf="!regUser">Зареєструватись</button> -->
+                </div>
             </form>
         </div>
     </div>

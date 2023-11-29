@@ -1,1 +1,41 @@
-<p>checkout works!</p>
+<div class="rounded-3 m-1">
+    <span class="m-1 text-success fw-bold">Ваше замовлення:</span>
+    <table class="table m-0">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Назва</th>
+                <th scope="col">Кть</th>
+                <th scope="col">Вага</th>
+                <th scope="col">Ціна</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of basket">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.count }}</td>
+                <td>{{ product.weight }}</td>
+                <td>{{ product.price }} грн</td>
+
+                <td>
+                    <!-- <button (click)="editProduct(product)" type="button"
+                                    class="btn btn-secondary me-2 btn-m">Змінити</button> -->
+                    <button mat-fab color="warn" (click)="deleteProduct(product)" title="Видалити позицію..." type="button"
+                        class="btn btn-danger btn-m p-0 del">
+                        <mat-icon>delete</mat-icon>
+                        <!-- <img src="../../assets/images/delete.jpg" alt="" height="20px"> -->
+                        </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="m-1 text-success fw-bold">Разом: {{ total }} грн.</span>
+    <div>
+        <button mat-stroked-button color="accent" class="btn text-success m-1">Підтвердити</button>
+        <button mat-stroked-button color="warm" class="btn text-danger me-1" (click)="clearBasket()">Очистити</button>
+        <button mat-stroked-button color="primary" class="btn me-1" (click)="basketClick()">Закрити</button>
+    </div>
+
+</div>

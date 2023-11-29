@@ -1,5 +1,29 @@
-<div class="row">
-    <div class="col">
-        <h4>Наразі тут немає нічого....</h4>
+<div class="rounded-3 m-1">
+    <span class="m-1 text-success fw-bold">Ваші минулі замовлення:</span>
+    <table class="table m-0">
+        <thead>
+            <tr>
+                <th scope="col">Дата</th>
+                <th scope="col">Назва</th>
+                <th scope="col">Кть</th>
+                <th scope="col">Вага</th>
+                <th scope="col">Ціна</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of history">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.count }}</td>
+                <td>{{ product.weight }}</td>
+                <td>{{ product.price }} грн</td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button mat-stroked-button color="primary" class="btn me-1" (click)="historyClick()">Закрити</button>
     </div>
+
 </div>

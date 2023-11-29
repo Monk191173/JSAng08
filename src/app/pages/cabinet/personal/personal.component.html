@@ -1,22 +1,19 @@
-<!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col m-auto" style="max-width: 500px;"> -->
-            <form [formGroup]="userForm" class="pt-3 pb-3">
-                <div class="flex-nowrap mb-3">
-                    <span class="text-primary" id="addon-wrapping" style="min-width: 100px;">І'мя</span>
-                    <input formControlName="name" type="text" class="form-control" aria-label="Username"
-                        aria-describedby="addon-wrapping">
-                </div>
-                <div class="flex-nowrap mb-3">
-                    <span class="text-primary" id="addon-wrapping1" style="min-width: 100px;">E-mail</span>
-                    <input formControlName="email" type="text" class="form-control" aria-label="Email"
-                        aria-describedby="addon-wrapping1" >
-                        <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" class="text-danger fw-bold">X</span>
-                </div>
-                
-                <button (click)="updateUser()" type="submit" class="btn btn-primary"
-                    [disabled]=userForm.invalid>Зберегти зміни</button>
-            </form>
-        <!-- </div>
+<form [formGroup]="userForm" class="pt-3 pb-1 d-flex flex-column justify-content-between" style="height: 320px;">
+    <div>
+        <div class="flex-nowrap mb-3">
+            <span class="text-primary" id="addon-wrapping" style="min-width: 100px;">І'мя</span>
+            <input formControlName="name" type="text" class="form-control" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="flex-nowrap mb-3">
+            <span class="text-primary" id="addon-wrapping1" style="min-width: 100px;">E-mail</span>
+            <input formControlName="email" type="text" class="form-control" aria-label="Email"
+                aria-describedby="addon-wrapping1" readonly>
+            <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" class="text-danger fw-bold">X</span>
+        </div>
     </div>
-</div> -->
+    <div>
+        <button (click)="updateUser()" type="submit" class="btn btn-primary" [disabled]=userForm.invalid>Змінити
+            ім'я</button>
+    </div>
+</form>

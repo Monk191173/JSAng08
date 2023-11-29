@@ -3,6 +3,10 @@ import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { IProductResponse } from '../shared/interfaces/products';
 import { ProductsService } from '../shared/services/products/products.service';
 import { UsersService } from '../shared/services/users/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginUserComponent } from '../pages/login-user/login-user.component';
+import { Router } from '@angular/router';
+import { CheckoutComponent } from '../pages/checkout/checkout.component';
 
 @Component({
   selector: 'app-header',
@@ -14,13 +18,15 @@ export class HeaderComponent {
   public total = 0;
   public total_count = 0;
   public basket: Array<IProductResponse> = [];
-  public basketOpen: boolean = false;
+  // public basketOpen: boolean = false;
   public urlAdm = '../../assets/images/user.svg';
   public roleRoute = 'login';
   constructor(
     // private storage: Storage,
     public prodService: ProductsService,
-    public userService: UsersService
+    public userService: UsersService,
+    public dialog: MatDialog,
+    private router: Router
   ) {
     // const refAct=ref(this.storage,'images/actions.svg');
 
@@ -35,9 +41,24 @@ export class HeaderComponent {
     }
     this.userService.userLogon.subscribe((data) => {
       if (data) { this.urlAdm = '../../assets/images/user_out.svg'; this.roleRoute = (JSON.parse(localStorage.getItem('curUser') as string).role == 'ADMIN') ? 'admin' : 'cabinet' }
-      else { this.urlAdm = '../../assets/images/user.svg'; localStorage.clear(); this.roleRoute = 'login' }
+      else {
+        this.urlAdm = '../../assets/images/user.svg'; localStorage.clear();
+        this.roleRoute = 'login'
+
+      }
     })
   }
+
+  loginUser() {
+    if (this.roleRoute == 'login') {
+      this.dialog.open(LoginUserComponent, {
+        backdropClass: 'dialog-back',
+        panelClass: 'auth-dialog'
+      });
+    }
+    else { this.router.navigate([this.roleRoute]) }
+  }
+
   loadBasket(): void {
     if (localStorage.length > 0 && localStorage.getItem('basket')) {
       this.basket = JSON.parse(localStorage.getItem('basket') as string);
@@ -58,27 +79,32 @@ export class HeaderComponent {
 
   updateBasket(): void {
     this.prodService.changeBasket.subscribe(() => {
-      this.basket=[];
+      this.basket = [];
       this.loadBasket();
     })
   }
 
   basketClick(): void {
-    this.basketOpen = !this.basketOpen
+    // this.basketOpen = !this.basketOpen
+    this.dialog.open(CheckoutComponent, {
+      backdropClass: 'dialog-back',
+      panelClass:'check-out',
+      autoFocus: false
+    });
   }
 
-  clearBasket(): void {
-    localStorage.removeItem('basket');
-    this.basket = [];
-    this.loadBasket();
-    this.basketOpen = false
-  }
+  // clearBasket(): void {
+  //   localStorage.removeItem('basket');
+  //   this.basket = [];
+  //   this.loadBasket();
+  //   this.basketOpen = false
+  // }
 
-  deleteProduct(product: IProductResponse): void {
-    this.basket.splice(this.basket.indexOf(product), 1);
-    localStorage.removeItem('basket');
-    localStorage.setItem('basket',JSON.stringify(this.basket))
-    this.loadBasket();
-  }
+  // deleteProduct(product: IProductResponse): void {
+  //   this.basket.splice(this.basket.indexOf(product), 1);
+  //   localStorage.removeItem('basket');
+  //   localStorage.setItem('basket', JSON.stringify(this.basket))
+  //   this.loadBasket();
+  // }
 
 }

@@ -22,11 +22,11 @@ export class ActionService {
     return this.http.post<IActionResponse>(this.api.actions, action);
   }
 
-  update(category: IActionRequest, id: number): Observable<IActionResponse> {
+  update(category: IActionRequest, id: number|string): Observable<IActionResponse> {
     return this.http.patch<IActionResponse>(`${this.api.actions}/${id}`, category);
   }
 
-  delete(id: number): Observable<void> {
+  delete(id: number|string): Observable<void> {
     return this.http.delete<void>(`${this.api.actions}/${id}`);
   }
 
