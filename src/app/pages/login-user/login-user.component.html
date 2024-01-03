@@ -19,28 +19,39 @@
                         <input matInput formControlName="name">
                     </mat-form-field>
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="userMail" class="form-label">Email address</label>
-                    <input formControlName="email" type="email" class="form-control" id="userMail">
-                    <span *ngIf="_email?.invalid && (_email?.touched||_email?.dirty)" Class="text-danger">Невірний
-                        email</span>
-                </div> -->
+                <div class="mb-3" *ngIf="regUser">
+                    <mat-form-field>
+                        <mat-label>Ваше прізвище</mat-label>
+                        <input matInput formControlName="sename">
+                    </mat-form-field>
+                </div>
+                <div class="mb-3" *ngIf="regUser">
+                    <mat-form-field>
+                        <mat-label>Телефон</mat-label>
+                        <input matInput placeholder="0xx1234567" formControlName="phone">
+                    </mat-form-field>
+                </div>
                 <div class="mb-3">
                     <mat-form-field>
                         <mat-label>Введіть email</mat-label>
                         <input matInput placeholder="pat@gmail.com" formControlName="email" [formControl]="e_mail">
-                        <!-- @if (e_mail.invalid)  -->
                         <mat-error *ngIf="_email.invalid">{{getErrorMessage()}}</mat-error>
                         
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
-                    <!-- <label for="userPassword" class="form-label">Password</label>
-                    <input formControlName="password" type="password" class="form-control" id="userPassword"> -->
-
                     <mat-form-field>
                         <mat-label>Введіть пароль</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                </div>
+                <div class="mb-3" *ngIf="regUser">
+                    <mat-form-field>
+                        <mat-label>Повторіть пароль</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="dupassword">
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>

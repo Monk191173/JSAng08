@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginUserComponent } from '../pages/login-user/login-user.component';
 import { Router } from '@angular/router';
 import { CheckoutComponent } from '../pages/checkout/checkout.component';
+import { CallbackComponent } from '../pages/callback/callback.component';
 
 @Component({
   selector: 'app-header',
@@ -57,6 +58,13 @@ export class HeaderComponent {
       });
     }
     else { this.router.navigate([this.roleRoute]) }
+  }
+
+  callback(){
+    this.dialog.open(CallbackComponent, {
+      backdropClass: 'dialog-back',
+      panelClass: 'auth-dialog'
+    });
   }
 
   loadBasket(): void {

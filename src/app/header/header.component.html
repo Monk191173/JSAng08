@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-xl  navbar-light bg-light p-0">
     <div class="container-fluid p-0 m-con">
-        <div class="logo">
-            <div>
-                <a [routerLink]="['/home']">
-                    <img src="../../assets/images/logo.svg" alt="">
-                </a>
-            </div>
-        </div>
+
         <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav nav bg-light d-flex flex-row"><!--me-auto mb-2 mb-lg-0-->
-                <!-- <div class="d-flex flex-row "> -->
+            <ul class="navbar-nav nav bg-light d-flex flex-row "><!--me-auto mb-2 mb-lg-0-->
+                <div class="logo nav-item">
+                    <div>
+                        <a [routerLink]="['/home']">
+                            <img src="../../assets/images/logo.svg" alt="">
+                        </a>
+                    </div>
+                </div>
                 <li class="nav-item ">
-                    <a [routerLink]="['/actions']">
+                    <a [routerLink]="['actions']">
                         <img src="../../assets/images/actions.svg" class="nav-link active " aria-current="page">
                         <span>Акції</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a [routerLink]="['/products/roli']">
+                    <a [routerLink]="['products/roli']">
                         <img src="../../assets/images/rolls.svg" class="nav-link">
                         <span>Роли</span>
                     </a>
@@ -65,10 +65,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <div class="callback">
-                        <img src="../../assets/images/phone.svg" class="nav-link">
+
+                    <div class="callback" (click)="callback()">
+                        <img src="../../assets/images/phone.svg"  height="20" width="20" >
                         <span>ми зателефонуємо</span>
                     </div>
+
                 </li>
 
                 <li class="nav-item flex-row">
@@ -87,7 +89,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item ">
+                <li class="nav-item">
                     <div class="basket" (click)="basketClick()">
                         <a>
                             <i>
@@ -147,7 +149,7 @@
             </div> -->
 
 
-            
+
             <!-- </div> -->
 
         </div>

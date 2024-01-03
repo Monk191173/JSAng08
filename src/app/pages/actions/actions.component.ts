@@ -20,7 +20,7 @@ export class ActionsComponent {
 
   constructor(
     private actionService: ActionService,
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private afs: Firestore
   ) { }
 

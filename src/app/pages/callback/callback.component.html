@@ -1,0 +1,15 @@
+<div class="container-fluid p-2" color="accent">
+  <form [formGroup]="callForm" (ngSubmit)="signIn()">
+    <mat-form-field>
+      <mat-label>Ваше ім'я</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Номер телефону</mat-label>
+      <input placeholder="0xx1234567" matInput formControlName="phone">
+    </mat-form-field>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button color="accent" type="submit">Надіслати</button>
+    </div>
+  </form>
+</div>

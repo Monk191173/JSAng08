@@ -97,6 +97,7 @@ export class AdminActionsComponent {
         }
       })
     })
+
   }
 
   async getActions(): Promise<QuerySnapshot<DocumentData>> {

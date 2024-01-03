@@ -28,7 +28,7 @@ export class ActionInfoComponent {
 
   getOneAction(): void {
     const ACTION_ID = String(this.activatedRoute.snapshot.paramMap.get('id'));
-    console.log(ACTION_ID);
+    // console.log(ACTION_ID);
     
 docData(doc(this.afs,'actions',ACTION_ID)).subscribe(data=>{
   this.filePath=data!['filePath'];

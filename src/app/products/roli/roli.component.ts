@@ -12,7 +12,7 @@ export class RoliComponent {
   // public subCategoryName='All';
   constructor(private prodService:ProductsService){}
   
-  ngOnInit():void{
+  ngOnInit():void{    
     this.setSubCat('All');
     // this.loadProducts()
   }

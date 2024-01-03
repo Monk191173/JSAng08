@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(prod:IProductResponse[], cat:string, subCat?:string): IProductResponse[] {
     if (!prod||!cat) return [];
-    if (!subCat||subCat=='All') return prod.filter(pro=>pro.category==cat);
+    if (!subCat||subCat=='All') return prod.filter(pro=>(pro.category==cat));
     return prod.filter(sub=>(sub.category==cat&&sub.subcategory==subCat));
   }
 

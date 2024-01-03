@@ -4,6 +4,7 @@ import { HeaderComponent } from 'src/app/header/header.component';
 import { IProductResponse } from 'src/app/shared/interfaces/products';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
 
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',

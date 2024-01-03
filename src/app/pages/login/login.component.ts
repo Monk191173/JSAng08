@@ -4,7 +4,6 @@ import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-// import { IUserRequest, IUserResponse } from 'src/app/shared/interfaces/users';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
 import { UsersService } from 'src/app/shared/services/users/users.service';
 

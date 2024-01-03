@@ -11,12 +11,14 @@ nav {
     top: 0;
     box-shadow: 0px 10px 5px -5px rgba(240, 239, 239, 0.37);
     z-index: 3;
+
 }
 
 .nav {
 
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     background-color: white;
     height: 110px;
     width: 100%;
@@ -25,9 +27,13 @@ nav {
 
     & ul {
         margin: 0;
+
     }
 
     & li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         & a {
             width: 75px;
@@ -88,6 +94,7 @@ ul[class^="dropdown"] {
     text-transform: none;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     & img {
         vertical-align: middle;
@@ -150,6 +157,7 @@ ul[class^="dropdown"] {
         display: inline-block;
         vertical-align: middle;
         min-width: 60px;
+
         & b {
             font-weight: bold;
             color: #252525;
@@ -205,7 +213,8 @@ ul[class^="dropdown"] {
         top: 100px;
         right: 5px;
         max-width: 560px;
-        & button:hover{
+
+        & button:hover {
             background-color: $main_color;
         }
     }
@@ -229,6 +238,7 @@ ul[class^="dropdown"] {
     .callback {
         padding-left: 10px;
         padding-right: 10px;
+
 
         & span {
             font-size: 12px;

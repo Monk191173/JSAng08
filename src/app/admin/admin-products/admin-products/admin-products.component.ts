@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { deleteObject, getDownloadURL, percentage, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 import { IProductResponse } from 'src/app/shared/interfaces/products';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
+import { DocumentData, Firestore, QuerySnapshot, addDoc, collection, deleteDoc, doc, getDocs, query, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-admin-products',
@@ -16,11 +17,23 @@ export class AdminProductsComponent {
   public uploadPercent!: number;
   public isUploaded = false;
   // public linkAct:string='';
-  private currentProductId = 0;
+  private currentProductId = '';
+  private product={
+    category:'',
+    description:'',
+    filePath:'',
+    name:'',
+    price:0,
+    subcategory:'',
+    weight:'',
+    count:1,
+    id:''
+  }
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductsService,
+    private afs: Firestore,
     private storage: Storage
   ) { }
 
@@ -76,20 +89,61 @@ export class AdminProductsComponent {
   }
 
   loadProducts(): void {
-    this.productService.getAll().subscribe(data => {
-      this.adminProducts = data;
+    this.adminProducts = [];
+    this.getProducts().then(data => {
+      data.docs.forEach(doc => {
+        this.product.description = doc.get('description');
+        this.product.filePath = doc.get('filePath');
+        this.product.name = doc.get('name');
+        this.product.id = doc.id;
+        this.product.category=doc.get('category');
+        this.product.subcategory=doc.get('subcategory');
+        this.product.price=doc.get('price');
+        this.product.weight=doc.get('weight');
+
+        this.adminProducts.push(this.product);
+        this.product = {
+          category:'',
+          description:'',
+          filePath:'',
+          name:'',
+          price:0,
+          subcategory:'',
+          weight:'',
+          count:1,
+          id:''
+        }
+      })
     })
+
+
+    // this.productService.getAll().subscribe(data => {
+    //   this.adminProducts = data;
+    // })
+  }
+
+  async getProducts(): Promise<QuerySnapshot<DocumentData>> {
+    const q = query(collection(this.afs, "products"));
+    const data = await getDocs(q);
+    return data
   }
 
   addProduct(): void {
     if (this.editStatus) {
-      this.productService.update(this.productForm.value, this.currentProductId).subscribe(() => {
+      
+      setDoc(doc(this.afs, 'products', this.currentProductId), this.productForm.value).then(() => {
         this.loadProducts();
       })
+      // this.productService.update(this.productForm.value, this.currentProductId).subscribe(() => {
+      //   this.loadProducts();
+      // })
     } else {
-      this.productService.create(this.productForm.value).subscribe(() => {
+      addDoc(collection(this.afs, "products"), this.productForm.value).then(() => {
         this.loadProducts();
       })
+      // this.productService.create(this.productForm.value).subscribe(() => {
+      //   this.loadProducts();
+      // })
     }
     this.editStatus = false;
     this.productForm.reset();
@@ -108,12 +162,15 @@ export class AdminProductsComponent {
       filePath: product.filePath
     });
     this.editStatus = true;
-    this.currentProductId = product.id as number;
+    this.currentProductId = product.id ;
     this.isUploaded = true;
   }
 
   deleteProduct(product: IProductResponse): void {
-    this.productService.delete(product.id as number).subscribe(() => {
+    // this.productService.delete(product.id).subscribe(() => {
+    //   this.loadProducts();
+    // })
+    deleteDoc(doc(this.afs, 'products', product.id)).then(() => {
       this.loadProducts();
     })
   }
