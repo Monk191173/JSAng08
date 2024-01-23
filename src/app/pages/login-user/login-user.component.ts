@@ -35,7 +35,7 @@ export class LoginUserComponent {
     private fb: FormBuilder,
     private router: Router,
     private auth: Auth,
-    private toastr: ToastrService,
+    public toastr: ToastrService,
     private afs: Firestore,
     private dialogRef: MatDialogRef<HeaderComponent>
   ) { }

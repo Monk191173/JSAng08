@@ -1,14 +1,28 @@
 import { TestBed } from '@angular/core/testing';
-import { ResolveFn } from '@angular/router';
+import {  ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot  } from '@angular/router';
 
 import { actionResolver } from './action.resolver';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ActionService } from '../services/actions/action.service';
+import { IActionResponse } from '../interfaces/actions';
 
 describe('actionResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
+  const executeResolver: ResolveFn<IActionResponse[]> = (...resolverParameters) => 
       TestBed.runInInjectionContext(() => actionResolver(...resolverParameters));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports:[
+        RouterTestingModule,
+        // HttpClientModule,
+        // Inject,
+        // Observable,
+        // ActionService
+      ]
+    });
   });
 
   it('should be created', () => {

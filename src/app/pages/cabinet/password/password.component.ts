@@ -14,7 +14,7 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
 export class PasswordComponent {
   public passForm!: FormGroup;
   // private Users!: IUserResponse[];
-  private curUser!: IUserRequest;
+  public curUser!: IUserRequest;
   constructor(
     private userService: UsersService,
     private fb: FormBuilder,
@@ -40,9 +40,12 @@ export class PasswordComponent {
     })
   }
 
-  async login(email: string, password: string): Promise<UserCredential> {
+  async login(email: string, password: string): Promise<UserCredential|undefined> {
+    if (password==null) return undefined
     const cred = await signInWithEmailAndPassword(this.auth, email, password);
-    return cred
+    if (cred) return cred
+    else return undefined
+     
   }
 
   async updUser(password: string): Promise<any> {
@@ -54,7 +57,7 @@ export class PasswordComponent {
     let oldPas = this.passForm.get('oldPass')?.value;
     let newPas = this.passForm.get('newPass')?.value;
     let pass = this.passForm.get('password')?.value;
-
+    
     this.login(this.curUser.email, oldPas).then(() => {
       if (pass != newPas) {
         this.toastr.error('Введено некоректні дані. Помилка в новому паролі !!!!');

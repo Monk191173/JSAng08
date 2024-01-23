@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { FirestoreModule, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { HeaderComponent } from './header/header.component';
@@ -35,6 +35,7 @@ import { CallbackComponent } from './pages/callback/callback.component';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { ShowProductComponent } from './products/show-product/show-product.component';
 import { InfoProductComponent } from './products/info-product/info-product.component';
+import { Firestore } from '@angular/fire/firestore/firebase';
 // import { LoginComponent } from './pages/login/login.component';
 // import { CabinetComponent } from './pages/cabinet/cabinet.component';
 // import { PersonalComponent } from './pages/cabinet/personal/personal.component';
@@ -51,6 +52,7 @@ import { InfoProductComponent } from './products/info-product/info-product.compo
     FooterComponent,
     CheckoutComponent,
     CallbackComponent,
+   
     // ShowProductComponent,
     InfoProductComponent,
     // ActionsComponent,
@@ -78,6 +80,7 @@ import { InfoProductComponent } from './products/info-product/info-product.compo
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, HttpClientModule,
     BrowserAnimationsModule, // required animations module

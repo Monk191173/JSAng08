@@ -36,7 +36,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.loadBasket();
     this.updateBasket();
-    if (localStorage.length > 0) {
+    if (localStorage.length > 0 && localStorage.getItem('curUser')) {
       this.urlAdm = '../../assets/images/user_out.svg';
       this.roleRoute = (JSON.parse(localStorage.getItem('curUser') as string).role == 'ADMIN') ? 'admin' : 'cabinet';
     }
@@ -101,18 +101,5 @@ export class HeaderComponent {
     });
   }
 
-  // clearBasket(): void {
-  //   localStorage.removeItem('basket');
-  //   this.basket = [];
-  //   this.loadBasket();
-  //   this.basketOpen = false
-  // }
-
-  // deleteProduct(product: IProductResponse): void {
-  //   this.basket.splice(this.basket.indexOf(product), 1);
-  //   localStorage.removeItem('basket');
-  //   localStorage.setItem('basket', JSON.stringify(this.basket))
-  //   this.loadBasket();
-  // }
 
 }

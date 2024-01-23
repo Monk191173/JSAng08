@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionService } from 'src/app/shared/services/actions/action.service';
 import { IActionResponse } from 'src/app/shared/interfaces/actions';
-import { ActivatedRoute } from '@angular/router';
+// import { ActivatedRoute } from '@angular/router';
 import { DocumentData, Firestore, QuerySnapshot, collection, doc, docData, getDocs, getFirestore, query } from '@angular/fire/firestore';
 
 @Component({
@@ -19,7 +19,7 @@ export class ActionsComponent {
   }
 
   constructor(
-    private actionService: ActionService,
+    public actionService: ActionService,
     // private route: ActivatedRoute,
     private afs: Firestore
   ) { }

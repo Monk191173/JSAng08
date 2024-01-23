@@ -26,7 +26,7 @@
                         <div class="btn-group p-1" role="group" aria-label="Basic outlined example">
                             <button (click)="productCount(product, false)" type="button"
                                 class="btn btn-outline-secondary p-1">-</button>
-                            <input type="text" class="btn btn-outline-secondary p-1" style="max-width: 40px;"
+                            <input *ngIf="product" type="text" class="btn btn-outline-secondary p-1" style="max-width: 40px;"
                                 [value]="product.count" readonly>
                             <button (click)="productCount(product, true)" type="button"
                                 class="btn btn-outline-secondary p-1">+</button>
@@ -37,7 +37,8 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="card-title text-danger" *ngIf="product.count>1">
+                    <!-- product.count>1&& -->
+                    <h4 class="card-title text-danger" *ngIf="product&&product.count>1">
                         {{ product.price * product.count }} грн
                     </h4>
                 </div>

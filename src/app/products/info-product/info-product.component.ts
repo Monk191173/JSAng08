@@ -10,6 +10,7 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./info-product.component.scss']
 })
 export class InfoProductComponent {
+  // public count=1;
   public filePath = '';
   public name = '';
   public description = '';
@@ -17,31 +18,36 @@ export class InfoProductComponent {
   public price: number = 0;
   public routes = [{ link: '/home', name: 'Головна' }];
   public product!: IProductResponse;
-  private myRes=new Subscription();
+  private myRes = new Subscription();
   constructor(
     private prodServ: ProductsService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    let path: string;
-    const PRODUCT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.prodServ.getOne(PRODUCT_ID).subscribe(data => {
-      this.product = data;
 
-      this.filePath = this.product.filePath;
-      this.name = this.product.name;
-      this.description = this.product.description;
-      this.weight = this.product.weight;
-      this.price = this.product.price;
-      switch (this.product.category) {
-        case 'Роли': { path = '/products/roli'; break }
-        case 'Сети': { path = '/products/setu'; break }
-        case 'Напої': { path = '/products/napoyi'; break }
-        case 'Соуси': { path = '/products/sousi'; break }
-      }
-      this.routes.push({ link: path, name: this.product.category.toString() })
+    let path: string;
+    let PRODUCT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    if(this.activatedRoute.snapshot.paramMap.get('id')!=null){
+    
+    this.prodServ.getOne(PRODUCT_ID).subscribe(data => {
+        this.product = data;
+        this.product.count = 1;
+        this.filePath = this.product.filePath;
+        this.name = this.product.name;
+        this.description = this.product.description;
+        this.weight = this.product.weight;
+        this.price = this.product.price;
+        switch (this.product.category) {
+          case 'Роли': { path = '/products/roli'; break }
+          case 'Сети': { path = '/products/setu'; break }
+          case 'Напої': { path = '/products/napoyi'; break }
+          case 'Соуси': { path = '/products/sousi'; break }
+
+        }
+        this.routes.push({ link: path, name: this.product.category.toString() })
     });
+  }
 
     this.myRes = this.activatedRoute.data.subscribe(({ product }) => {
       this.product = product;

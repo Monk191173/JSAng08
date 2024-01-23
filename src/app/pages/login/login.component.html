@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col m-auto" style="max-width: 500px;">
-            <form [formGroup]="usersForm" (ngSubmit)="signIn()">
+            <form *ngIf="usersForm" [formGroup]="usersForm" (ngSubmit)="signIn()">
                 <div class="mb-3 text-center">
                     <h4>Введіть дані для входу...</h4>
                 </div>

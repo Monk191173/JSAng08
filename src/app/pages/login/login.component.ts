@@ -67,11 +67,6 @@ export class LoginComponent {
   signIn(): void {
     let em = this.usersForm.get('email')?.value;
     let pas = this.usersForm.get('password')?.value;
-    // const user = {
-    //   role: 'USER',
-    //   email: '',
-    //   firstName: ''
-    // }
 
       if (pas == '' || pas == null) { this.toastr.error('Помилка в паролі !!!'); return }
       this.login(em, pas).then(dataUs => {

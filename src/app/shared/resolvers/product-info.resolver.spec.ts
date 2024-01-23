@@ -2,9 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { productInfoResolver } from './product-info.resolver';
+import { IProductResponse } from '../interfaces/products';
 
 describe('roductInfoResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
+  const executeResolver: ResolveFn<IProductResponse[]> = (...resolverParameters) => 
       TestBed.runInInjectionContext(() => productInfoResolver(...resolverParameters));
 
   beforeEach(() => {

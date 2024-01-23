@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Auth, updateCurrentUser, updateEmail } from '@angular/fire/auth';
-import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentSnapshot, Firestore, doc, docData, getDoc, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
 })
 export class PersonalComponent {
   public userForm!: FormGroup;
-  private User = {
+  public User = {
     uid: '',
     email: '',
     role: '',
@@ -30,16 +30,28 @@ export class PersonalComponent {
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     private afs: Firestore
-  ) { }
+  ) {  }
 
   ngOnInit() {
+
     this.getUser();
     this.initUsersForm();
 
   }
 
   getUser(): void {
+
     this.User = JSON.parse(localStorage.getItem('curUser') as string);
+    if (!this.User){
+    this.User = {
+      uid: '',
+      email: '',
+      role: '',
+      firstName: '',
+      lastName: '',
+      phone: ''
+    }
+  }
     this.userForm = this.fb.group({
       name: [this.User.firstName],
       sename: [this.User.lastName],
@@ -55,20 +67,42 @@ export class PersonalComponent {
     // return await updateEmail(user!, email);
   }
 
-  initUsersForm(): void {
-    docData(doc(this.afs, 'users', this.User.uid)).subscribe(dbUser => {
-      this.User.lastName = dbUser!['lastName'];
-      this.User.phone = dbUser!['phone'];
+  async loadUser(id:string):Promise<DocumentSnapshot<DocumentData>>{
+    const ref=doc(this.afs, "users",id);
+    return await getDoc(ref)
+  // return await getDocs(query(collection(this.afs, "actions"),where("name","==",id))) //,where("name","==",id)
+    }
 
+  initUsersForm(): void {
+
+    this.loadUser(this.User.uid).then(data => {
+      this.User.lastName = data.get('lastName');
+      this.User.phone = data.get('phone');
+      
       this.userForm = this.fb.group({
         name: [this.User.firstName],
         sename: [this.User.lastName],
         phone: [this.User.phone],
         email: [this.User.email, Validators.pattern(/^[\w-\.]+@{1}[a-zA-Z]+\.{1}[a-zA-Z]{2,}$/)
         ]
-      })
+      })  
 
     })
+
+
+    // docData(doc(this.afs, 'users', this.User.uid)).subscribe(dbUser => {
+    //   this.User.lastName = dbUser!['lastName'];
+    //   this.User.phone = dbUser!['phone'];
+
+    //   this.userForm = this.fb.group({
+    //     name: [this.User.firstName],
+    //     sename: [this.User.lastName],
+    //     phone: [this.User.phone],
+    //     email: [this.User.email, Validators.pattern(/^[\w-\.]+@{1}[a-zA-Z]+\.{1}[a-zA-Z]{2,}$/)
+    //     ]
+    //   })
+
+    // })
 
   }
 

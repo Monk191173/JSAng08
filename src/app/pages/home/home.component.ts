@@ -10,7 +10,9 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
 export class HomeComponent  {
 // public product:Array<IProductResponse>=[];
 // public subCategoryName=this.prodService.subCategoryName;
-constructor(private prodService:ProductsService){}
+constructor(
+  public prodService:ProductsService
+  ){}
 
 
 
