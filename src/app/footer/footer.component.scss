@@ -46,12 +46,13 @@ li {
         justify-content: space-between;
         align-items: center;
         padding: 20px 0;
+
         .m-li {
             max-width: 300px;
             display: flex;
             justify-content: center;
+
             & a {
-                // width: 60px;
                 display: inline-flex;
                 align-items: flex-end;
             }
@@ -59,7 +60,6 @@ li {
 
         & ul {
 
-            // width: 285px;
             padding-left: 0;
         }
 

@@ -4,8 +4,9 @@ import { NapoyiComponent } from './napoyi.component';
 import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resolver';
 
 const routes: Routes = [
-    {path:'',component:NapoyiComponent,
-    resolve:{product:productInfoResolver}
+  {
+    path: '', component: NapoyiComponent,
+    resolve: { product: productInfoResolver }
   }
 ]
 

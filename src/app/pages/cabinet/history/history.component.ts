@@ -10,11 +10,11 @@ import { IProductResponse } from 'src/app/shared/interfaces/products';
 })
 export class HistoryComponent {
   public history: Array<IProductResponse> = [];
-constructor(
-  private dialogRef:MatDialogRef<CabinetComponent>
-){}
+  constructor(
+    private dialogRef: MatDialogRef<CabinetComponent>
+  ) { }
 
-historyClick(): void {
-  this.dialogRef.close()
-}
+  historyClick(): void {
+    this.dialogRef.close()
+  }
 }

@@ -65,7 +65,7 @@ describe('PersonalComponent', () => {
       phone: ''
     }
     
-    component.getUser();
+    component.getUserLocal();
     component.User = FAKE_User;
     expect(component.User.firstName).toBe('A');
   });

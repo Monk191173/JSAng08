@@ -17,19 +17,19 @@ export class CabinetComponent {
     private userService: UsersService,
     public dialog: MatDialog,
     private router: Router
-  ){}
+  ) { }
 
-  goHome(){
+  goHome() {
     localStorage.clear();
     this.userService.userLogon.next(false);
     this.prodService.changeBasket.next(true);
     this.router.navigate(['']);
   }
 
-  openHistory(){
+  openHistory() {
     this.dialog.open(HistoryComponent, {
       backdropClass: 'dialog-back',
-      panelClass:'check-out',
+      panelClass: 'check-out',
       autoFocus: false
     });
   }

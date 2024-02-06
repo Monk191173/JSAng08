@@ -12,8 +12,6 @@
                     <h4>Новий акаунт...</h4>
                 </div>
                 <div class="mb-3" *ngIf="regUser">
-                    <!-- <label for="userName" class="form-label">Ваше ім'я</label>
-                    <input formControlName="name" type="text" class="form-control" id="userName"> -->
                     <mat-form-field>
                         <mat-label>Ваше ім'я</mat-label>
                         <input matInput formControlName="name">
@@ -36,26 +34,28 @@
                         <mat-label>Введіть email</mat-label>
                         <input matInput placeholder="pat@gmail.com" formControlName="email" [formControl]="e_mail">
                         <mat-error *ngIf="_email.invalid">{{getErrorMessage()}}</mat-error>
-                        
+
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
                     <mat-form-field>
                         <mat-label>Введіть пароль</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
-                      </mat-form-field>
+                    </mat-form-field>
                 </div>
                 <div class="mb-3" *ngIf="regUser">
                     <mat-form-field>
                         <mat-label>Повторіть пароль</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="dupassword">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
-                      </mat-form-field>
+                    </mat-form-field>
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                     <button mat-raised-button type="submit" color="accent"

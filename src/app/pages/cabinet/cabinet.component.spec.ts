@@ -6,6 +6,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CollectionReference } from '@firebase/firestore';
 
 describe('CabinetComponent', () => {
   let component: CabinetComponent;
@@ -15,12 +16,13 @@ describe('CabinetComponent', () => {
     TestBed.configureTestingModule({
       declarations: [CabinetComponent],
       imports:[
-        HttpClientModule,
-        RouterTestingModule
+        // HttpClientModule,
+        RouterTestingModule,
+        CollectionReference
       ],
       providers:[
         {provide:Firestore, useValue:{}},
-        {provide:MatDialog, useValue:{}}
+        {provide:MatDialog, useValue:{}},
       ],
       schemas:[CUSTOM_ELEMENTS_SCHEMA]
     });

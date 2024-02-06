@@ -44,8 +44,7 @@
                         <span>Соуси</span>
                     </a>
                 </li>
-                <!-- </div> -->
-                <!-- <div class="d-flex flex-row "> -->
+
                 <li class="nav-item">
                     <a>
                         <div class="dropdown">
@@ -67,7 +66,7 @@
                 <li class="nav-item">
 
                     <div class="callback" (click)="callback()">
-                        <img src="../../assets/images/phone.svg"  height="20" width="20" >
+                        <img src="../../assets/images/phone.svg" height="20" width="20">
                         <span>ми зателефонуємо</span>
                     </div>
 
@@ -81,7 +80,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <!-- [routerLink]="[roleRoute]" -->
                     <a (click)="loginUser()">
                         <div class="adminka">
                             <img src="{{urlAdm}}" class="nav-link w-100">
@@ -105,52 +103,6 @@
                     </div>
                 </li>
             </ul>
-            <!-- <div class="basket-menu rounded-3" *ngIf="basketOpen">
-                <div class="row">
-                    <span class="m-1 text-success">Ваше замовлення:</span>
-                    <div class="col-12">
-                        <table class="table w-100">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Назва</th>
-                                    <th scope="col">Кть</th>
-                                    <th scope="col">Вага</th>
-                                    <th scope="col">Ціна</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let product of basket">
-                                    <td>{{ product.id }}</td>
-                                    <td>{{ product.name }}</td>
-                                    <td>{{ product.count }}</td>
-                                    <td>{{ product.weight }}</td>
-                                    <td>{{ product.price }} грн</td>
-
-                                    <td> -->
-                                        <!-- <button (click)="editProduct(product)" type="button"
-                                                class="btn btn-secondary me-2 btn-m">Змінити</button> -->
-                                        <!-- <button (click)="deleteProduct(product)" title="Видалити позицію..."
-                                            type="button" class="btn btn-danger btn-m p-0"><img
-                                                src="../../assets/images/delete.jpg" alt="" height="20px"></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <button class="btn text-success">Підтвердити</button>
-                        <button class="btn text-danger" (click)="clearBasket()">Очистити</button>
-                        <button class="btn " (click)="basketClick()">Закрити</button>
-                    </div>
-                </div>
-
-            </div> -->
-
-
-
-            <!-- </div> -->
 
         </div>
 
@@ -159,6 +111,3 @@
 </nav>
 
 <div class="spacer"></div>
-<!-- <div class="spacer"></div>
-<div class="spacer"></div>
-<div class="spacer"></div> -->

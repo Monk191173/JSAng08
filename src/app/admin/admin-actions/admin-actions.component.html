@@ -7,20 +7,11 @@
                     <input formControlName="name" name="name" type="text" class="form-control"
                         aria-describedby="basic-addon1" id="name">
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="name" class="form-label">Назва</label>
-                    <input formControlName="name" name="name" type="text" class="form-control" id="name">
-                </div> -->
                 <div class="input-group mb-3">
                     <span class="input-group-text">Опис акції</span>
                     <textarea formControlName="description" class="form-control" aria-label="With textarea"
                         id="description" style="max-height: 160px;"></textarea>
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="description" class="form-label">Опис</label>
-                    <textarea formControlName="description" class="form-control" id="description"></textarea>
-                    <div class="invalid-feedback">Description is required</div>
-                </div> -->
 
                 <ng-container *ngIf="!isUploaded">
                     <div class="mb-3">
@@ -66,14 +57,14 @@
                         <td>{{ action.name }}</td>
                         <td style="max-width: 300px;">{{ action.description }}</td>
                         <td>
-                            <img [src]="action.filePath" alt="" height="50px" >
+                            <img [src]="action.filePath" alt="" height="50px">
                         </td>
-                            <td>
-                                <button (click)="editAction(action)" type="button"
-                                    class="btn btn-secondary me-2 btn-m">Змінити</button>
-                                <button [disabled]="editStatus" (click)="deleteAction(action)" type="button"
-                                    class="btn btn-danger btn-m">Видалити</button>
-                            </td>
+                        <td>
+                            <button (click)="editAction(action)" type="button"
+                                class="btn btn-secondary me-2 btn-m">Змінити</button>
+                            <button [disabled]="editStatus" (click)="deleteAction(action)" type="button"
+                                class="btn btn-danger btn-m">Видалити</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

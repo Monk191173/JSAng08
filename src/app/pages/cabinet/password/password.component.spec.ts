@@ -65,7 +65,7 @@ describe('PasswordComponent', () => {
   });
 
  it('try change password in the user cabinet should be undefined for fake user', () => {
-    component.getUsers();
+    component.getUsersLocal();
     component.curUser={
       email :'123@gmail.com',
       name: '',

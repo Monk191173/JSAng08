@@ -18,16 +18,14 @@ export class LoginUserComponent {
   e_mail = new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@{1}[a-zA-Z]+\.{1}[a-zA-Z]{2,}$/)]);
   e_pas = new FormControl('');
   hide = true;
-  // private Users!: IUserResponse[];
-  // private newUser!: IUserRequest;
   public usersForm!: FormGroup;
   private curUser = {
     uid: '',
     email: '',
     role: '',
     firstName: '',
-    lastName:'',
-    phone:''
+    lastName: '',
+    phone: ''
   };
 
   constructor(
@@ -54,7 +52,6 @@ export class LoginUserComponent {
     localStorage.clear();
     this.initUsersForm();
     this.userService.userLogon.next(false);
-    // this.prodService.changeBasket.next(true);
   }
 
   initUsersForm(): void {
@@ -62,11 +59,10 @@ export class LoginUserComponent {
     this.usersForm = this.fb.group({
       name: [null],
       sename: [null],
-      phone:[null],
+      phone: [null],
       email: this.e_mail,
-      // [null, Validators.pattern(/^[\w-\.]+@{1}[a-zA-Z]+\.{1}[a-zA-Z]{2,}$/)    ],
       password: [null, Validators.required],
-      dupassword:this.e_pas
+      dupassword: this.e_pas
     })
   }
 
@@ -85,20 +81,20 @@ export class LoginUserComponent {
       role: 'USER',
       email: '',
       firstName: '',
-      lastName:'',
-      phone:''
+      lastName: '',
+      phone: ''
     }
 
 
     if (this.regUser) {
       let nam = this.usersForm.get('name')?.value;
       if (nam == '' || nam == ' ' || nam == null) { this.toastr.error('Помилка в імені !!!'); return }
-      if (dupas !=pas ) { this.toastr.error('Помилка в паролі !!!'); return }
+      if (dupas != pas) { this.toastr.error('Помилка в паролі !!!'); return }
       this.signUp(em, pas).then(data => {
         user.email = em;
         user.firstName = nam;
-        user.lastName=sename;
-        user.phone=phone;
+        user.lastName = sename;
+        user.phone = phone;
         setDoc(doc(this.afs, 'users', data.user.uid), user);
         this.toastr.success('Успішно зареєстровано !!')
         this.regUser = false;
@@ -126,7 +122,7 @@ export class LoginUserComponent {
             this.toastr.success('Вітаємо !!')
             this.dialogRef.close();
           }
-          else {this.toastr.warning('Щось пішло не так...певно ви не юзер )')}
+          else { this.toastr.warning('Щось пішло не так...певно ви не юзер )') }
         })
       }).catch(e => {
         this.toastr.error(e.code)

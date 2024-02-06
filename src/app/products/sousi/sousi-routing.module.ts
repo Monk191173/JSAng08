@@ -4,8 +4,9 @@ import { SousiComponent } from './sousi.component';
 import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resolver';
 
 const routes: Routes = [
-    {path:'',component:SousiComponent,
-    resolve:{product:productInfoResolver}
+  {
+    path: '', component: SousiComponent,
+    resolve: { product: productInfoResolver }
   }
 ]
 

@@ -10,7 +10,6 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./info-product.component.scss']
 })
 export class InfoProductComponent {
-  // public count=1;
   public filePath = '';
   public name = '';
   public description = '';
@@ -26,12 +25,13 @@ export class InfoProductComponent {
 
   ngOnInit(): void {
 
-    let path: string;
-    let PRODUCT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    if(this.activatedRoute.snapshot.paramMap.get('id')!=null){
-    
-    this.prodServ.getOne(PRODUCT_ID).subscribe(data => {
-        this.product = data;
+    let path: string = '';
+    let PRODUCT_ID = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    if (this.activatedRoute.snapshot.paramMap.get('id') != null) {
+
+      this.prodServ.getOneFirebase(PRODUCT_ID).subscribe(data => {
+        this.routes = [{ link: '/home', name: 'Головна' }];
+        this.product = data as IProductResponse;
         this.product.count = 1;
         this.filePath = this.product.filePath;
         this.name = this.product.name;
@@ -43,11 +43,10 @@ export class InfoProductComponent {
           case 'Сети': { path = '/products/setu'; break }
           case 'Напої': { path = '/products/napoyi'; break }
           case 'Соуси': { path = '/products/sousi'; break }
-
         }
-        this.routes.push({ link: path, name: this.product.category.toString() })
-    });
-  }
+        this.routes.push({ link: path, name: this.product.category });
+      });
+    }
 
     this.myRes = this.activatedRoute.data.subscribe(({ product }) => {
       this.product = product;
@@ -80,4 +79,11 @@ export class InfoProductComponent {
     product.count = 1;
     this.prodServ.changeBasket.next(true);
   }
+
+  ngOnDestroy() {
+    this.myRes.unsubscribe()
+  }
+
 }
+
+

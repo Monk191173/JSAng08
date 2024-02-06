@@ -4,8 +4,9 @@ import { SetuComponent } from './setu.component';
 import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resolver';
 
 const routes: Routes = [
-    {path:'',component:SetuComponent,
-    resolve:{product:productInfoResolver}
+  {
+    path: '', component: SetuComponent,
+    resolve: { product: productInfoResolver }
   }
 ]
 

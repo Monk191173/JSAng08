@@ -6,7 +6,7 @@ import { IProductResponse } from '../interfaces/products';
 
 describe('roductInfoResolver', () => {
   const executeResolver: ResolveFn<IProductResponse[]> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => productInfoResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => productInfoResolver(...resolverParameters) as IProductResponse[]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

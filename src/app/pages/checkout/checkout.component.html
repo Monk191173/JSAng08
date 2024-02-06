@@ -3,7 +3,7 @@
     <table class="table m-0">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">№</th>
                 <th scope="col">Назва</th>
                 <th scope="col">Кть</th>
                 <th scope="col">Вага</th>
@@ -12,22 +12,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of basket">
-                <td>{{ product.id }}</td>
+            <tr *ngFor="let product of basket;index as ind">
+                <td>{{ ind+1 }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.count }}</td>
                 <td>{{ product.weight }}</td>
                 <td>{{ product.price }} грн</td>
 
                 <td>
-                    <!-- <button (click)="editProduct(product)" type="button"
-                                    class="btn btn-secondary me-2 btn-m">Змінити</button> -->
-                    <button mat-fab color="warn" (click)="deleteProduct(product)" title="Видалити позицію..." type="button"
-                        class="btn btn-danger btn-m p-0 del">
+                    <button mat-fab color="warn" (click)="deleteProduct(product)" title="Видалити позицію..."
+                        type="button" class="btn btn-danger btn-m p-0 del">
                         <mat-icon>delete</mat-icon>
-                        <!-- <img src="../../assets/images/delete.jpg" alt="" height="20px"> -->
-
-                        </button>
+                    </button>
                 </td>
             </tr>
         </tbody>

@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    CabinetComponent, 
+    CabinetComponent,
     PersonalComponent,
     HistoryComponent,
     PasswordComponent

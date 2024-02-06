@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,9 +13,7 @@ import { UsersService } from 'src/app/shared/services/users/users.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  // public regUser = false;
-  // private Users!: IUserResponse[];
-  // private newUser!: IUserRequest;
+
   public usersForm!: FormGroup;
   private curUser = {
     uid: '',
@@ -60,35 +58,31 @@ export class LoginComponent {
     })
   }
 
-  // goReg(): void {
-  //   this.regUser = true
-  // }
 
   signIn(): void {
     let em = this.usersForm.get('email')?.value;
     let pas = this.usersForm.get('password')?.value;
 
-      if (pas == '' || pas == null) { this.toastr.error('Помилка в паролі !!!'); return }
-      this.login(em, pas).then(dataUs => {
-        docData(doc(this.afs, 'users', dataUs.user.uid)).subscribe(data => {
-          this.curUser.role = data!['role'];
-          if (this.curUser.role == 'ADMIN') {
-          this.curUser.email =dataUs.user.providerData[0].uid;
+    if (pas == '' || pas == null) { this.toastr.error('Помилка в паролі !!!'); return }
+    this.login(em, pas).then(dataUs => {
+      docData(doc(this.afs, 'users', dataUs.user.uid)).subscribe(data => {
+        this.curUser.role = data!['role'];
+        if (this.curUser.role == 'ADMIN') {
+          this.curUser.email = dataUs.user.providerData[0].uid;
           this.curUser.uid = dataUs.user.uid;
-          // this.curUser.firstName = data!['firstName'];
           localStorage.setItem("curUser", JSON.stringify(this.curUser));
           this.router.navigate(['admin']);
           this.userService.userLogon.next(true);
           this.toastr.success('Вітаємо !!');
-          }
-          else {
-            this.toastr.warning('Натисніть на користувача біля корзини !!!');
-            this.router.navigate(['']);
-          }
-        })
-      }).catch(e => {
-        this.toastr.error(e.code)
+        }
+        else {
+          this.toastr.warning('Натисніть на користувача біля корзини !!!');
+          this.router.navigate(['']);
+        }
       })
+    }).catch(e => {
+      this.toastr.error(e.code)
+    })
 
   }
 

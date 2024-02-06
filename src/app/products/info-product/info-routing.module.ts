@@ -5,12 +5,11 @@ import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resol
 
 
 const routes: Routes = [
-    // {path:'',component:InfoProductComponent},
-    {
-        path: '', component: InfoProductComponent, resolve: {
-          product: productInfoResolver
-        }
-      },
+  {
+    path: '', component: InfoProductComponent, resolve: {
+      product: productInfoResolver
+    }
+  },
 ]
 
 @NgModule({

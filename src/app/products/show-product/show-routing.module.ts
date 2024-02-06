@@ -4,7 +4,10 @@ import { ShowProductComponent } from './show-product.component';
 import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resolver';
 
 const routes: Routes = [
-    {path:'',component:ShowProductComponent
+  {
+    path: '', component: ShowProductComponent, resolve: {
+      product: productInfoResolver
+    }
   }
 ]
 

@@ -8,5 +8,6 @@ export const environment = {
     authDomain: 'monosushi-be507.firebaseapp.com',
     messagingSenderId: '84867997380',
   },
-  BACKEND_URL: 'http://localhost:3000'
+  production: false,
+  // BACKEND_URL: 'http://localhost:3000'
 };

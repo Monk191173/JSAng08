@@ -1,29 +1,38 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { IUserRequest, IUserResponse } from '../../interfaces/users';
+import { IUserPersonal, IUserRequest } from '../../interfaces/users';
 import { Observable, Subject } from 'rxjs';
+import { CollectionReference, DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private url = environment.BACKEND_URL;
-  private api = { users: `${this.url}/users` };
-  public userLogon=new Subject<boolean>();
-  
-  constructor(private http: HttpClient) { }
+  public userLogon = new Subject<boolean>();
+  private usersColection!: CollectionReference<DocumentData>
 
-  getAll(): Observable<IUserResponse[]> {
-    return this.http.get<IUserResponse[]>(this.api.users);
+  constructor(
+    private afs: Firestore
+  ) {
+    this.usersColection = collection(afs, 'users');
   }
 
-  create(user: IUserRequest): Observable<IUserResponse> {
-    return this.http.post<IUserResponse>(this.api.users, user);
+
+  getAllFirestore() {
+    return collectionData(this.usersColection, { idField: 'id' })
   }
 
-  update(user: IUserRequest, id: number|string): Observable<IUserResponse> {
-    return this.http.patch<IUserResponse>(`${this.api.users}/${id}`, user);
+  createFirestore(user: IUserRequest): Promise<DocumentReference<DocumentData>> {
+    return addDoc(this.usersColection, user)
+  }
+
+  updateFirestore(user: IUserPersonal, id: string) {
+    const usRef = doc(this.afs, `users/${id}`);
+    return setDoc(usRef, user)
+  }
+
+  getOneFirebase(id: string): Observable<IUserPersonal> {
+    const usRef = doc(this.afs, `users/${id}`);
+    return docData(usRef, { idField: 'uid' }) as Observable<IUserPersonal>
   }
 
 }

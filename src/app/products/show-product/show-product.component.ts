@@ -1,7 +1,6 @@
-import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, NgModule } from '@angular/core';
-import { DocumentData, Firestore, QuerySnapshot, collection, getDocs, query } from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, Subscribable, Subscriber, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { IProductResponse } from 'src/app/shared/interfaces/products';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
 
@@ -11,101 +10,44 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./show-product.component.scss']
 })
 export class ShowProductComponent {
-  public product!:IProductResponse[];
-  public curProduct: IProductResponse[]=[] ;
+  public product!: IProductResponse[];
   public subCategoryName = 'All';
   public CategoryName = 'Роли';
-  private myRes = new Subscription();
   private mySub = new Subscription();
 
 
   constructor(
     private prodService: ProductsService,
     private route: ActivatedRoute,
-    private afs: Firestore
-  ) {
-    // this.loadProducts();
-    
-  }
+  ) { }
 
 
   ngOnInit(): void {
     this.route.data.subscribe(({ product }) => {
-      this.product=product
+      this.product = product
     })
-//       // console.log(product);
-//       // this.loadProducts()
-// console.log({product}.product[0]);
 
-  
-//       this.curProduct = product as IProductResponse[];
-//       console.log('route',this.curProduct);
-//     })
-// this.prodService.getAll().then(data=>{
-//   data.forEach(doc => { console.log('getall',doc)})
-  
-  
-  // this.curProduct =data as IProductResponse[]
-// })
-    // this.loadProducts();
     this.subCategoryName = this.prodService.subCategoryName;
     this.CategoryName = this.prodService.CategoryName;
-    // console.log('init');
-    
-    // console.log(this.subCategoryName,this.CategoryName);
-    // console.log(this.curProduct);
-    
+    this.loadProducts()
+
     this.mySub = this.prodService.changeProductGroup.subscribe(() => {
-      // console.log('change');
       this.subCategoryName = this.prodService.subCategoryName;
       this.CategoryName = this.prodService.CategoryName;
       this.loadProducts()
     })
   }
 
-   loadProducts(): void {
-    // this.curProduct = [];
-        this.prodService.getAll().subscribe(data => {
-      this.product = data;
+  loadProducts(): void {
+    this.prodService.getAllFirebase().subscribe(data => {
+      this.product = data as IProductResponse[];
+      this.product.forEach((val) => {
+        val.count = 1
+      })
     })
-    // this.getProducts().then(data => {
-    //   data.docs.forEach(doc => {        
-    //     this.product.description = doc.get('description');
-    //     // console.log(this.product.description);
-    //     this.product.filePath = doc.get('filePath');
-    //     this.product.name = doc.get('name');
-    //     this.product.id = doc.id;
-    //     this.product.category=doc.get('category');
-    //     this.product.subcategory=doc.get('subcategory');
-    //     this.product.price=doc.get('price');
-    //     this.product.weight=doc.get('weight');
-    //     this.curProduct.push(this.product);
-    //     // this.subCategoryName = doc.get('subcategory');
-    //     // this.CategoryName = doc.get('category');
-    //     this.product = {
-    //       category: '',
-    //       description: '',
-    //       filePath: '',
-    //       name: '',
-    //       price: 0,
-    //       subcategory: '',
-    //       weight: '',
-    //       count: 1,
-    //       id: ''
-    //     }
-    //   })
-
-    // })
-  }
-
-  async getProducts(): Promise<QuerySnapshot<DocumentData>> {
-    const q = query(collection(this.afs, "products"));
-    // this.curProduct = [];
-    const data = await getDocs(q);
-    return data;
-    
 
   }
+
 
   productCount(product: IProductResponse, value: boolean): void {
     if (value) {
@@ -134,7 +76,6 @@ export class ShowProductComponent {
   }
 
   ngOnDestroy(): void {
-    this.myRes.unsubscribe();
     this.mySub.unsubscribe()
   }
 

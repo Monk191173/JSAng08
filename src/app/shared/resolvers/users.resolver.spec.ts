@@ -6,7 +6,7 @@ import { IUserResponse } from '../interfaces/users';
 
 describe('usersResolver', () => {
   const executeResolver: ResolveFn<IUserResponse[]> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => usersResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => usersResolver(...resolverParameters) as IUserResponse[]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

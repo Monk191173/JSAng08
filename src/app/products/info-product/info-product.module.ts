@@ -4,7 +4,7 @@ import { InfoRoutingModule } from './info-routing.module';
 import { InfoProductComponent } from './info-product.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [InfoProductComponent],
   imports: [
     CommonModule,
     InfoRoutingModule

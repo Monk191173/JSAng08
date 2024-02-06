@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CollectionReference } from '@firebase/firestore';
 import { SetuComponent } from './setu.component';
-import { HttpClientModule } from '@angular/common/http';
 import { Firestore } from '@angular/fire/firestore';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -12,7 +11,7 @@ describe('SetuComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SetuComponent],
-      imports:[HttpClientModule],
+      imports:[CollectionReference],
       providers:[
         {provide:Firestore, useValue:{}},
       ],

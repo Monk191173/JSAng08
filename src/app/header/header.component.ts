@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
 import { IProductResponse } from '../shared/interfaces/products';
 import { ProductsService } from '../shared/services/products/products.service';
 import { UsersService } from '../shared/services/users/users.service';
@@ -15,27 +14,23 @@ import { CallbackComponent } from '../pages/callback/callback.component';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  // public linkAct='';
   public total = 0;
   public total_count = 0;
   public basket: Array<IProductResponse> = [];
-  // public basketOpen: boolean = false;
   public urlAdm = '../../assets/images/user.svg';
   public roleRoute = 'login';
   constructor(
-    // private storage: Storage,
     public prodService: ProductsService,
     public userService: UsersService,
     public dialog: MatDialog,
     private router: Router
-  ) {
-    // const refAct=ref(this.storage,'images/actions.svg');
+  ) { }
 
-    // getDownloadURL(refAct).then(data=>this.linkAct=data);
-  }
+
   ngOnInit(): void {
     this.loadBasket();
     this.updateBasket();
+
     if (localStorage.length > 0 && localStorage.getItem('curUser')) {
       this.urlAdm = '../../assets/images/user_out.svg';
       this.roleRoute = (JSON.parse(localStorage.getItem('curUser') as string).role == 'ADMIN') ? 'admin' : 'cabinet';
@@ -60,7 +55,7 @@ export class HeaderComponent {
     else { this.router.navigate([this.roleRoute]) }
   }
 
-  callback(){
+  callback() {
     this.dialog.open(CallbackComponent, {
       backdropClass: 'dialog-back',
       panelClass: 'auth-dialog'
@@ -93,10 +88,9 @@ export class HeaderComponent {
   }
 
   basketClick(): void {
-    // this.basketOpen = !this.basketOpen
     this.dialog.open(CheckoutComponent, {
       backdropClass: 'dialog-back',
-      panelClass:'check-out',
+      panelClass: 'check-out',
       autoFocus: false
     });
   }

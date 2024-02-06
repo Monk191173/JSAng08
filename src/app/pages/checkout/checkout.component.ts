@@ -15,8 +15,8 @@ export class CheckoutComponent {
   public total = 0;
   constructor(
     public prodService: ProductsService,
-    private dialogRef:MatDialogRef<HeaderComponent>
-  ){}
+    private dialogRef: MatDialogRef<HeaderComponent>
+  ) { }
 
   ngOnInit(): void {
     this.loadBasket();

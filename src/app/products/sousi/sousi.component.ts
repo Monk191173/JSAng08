@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IProductResponse } from 'src/app/shared/interfaces/products';
 import { ProductsService } from 'src/app/shared/services/products/products.service';
 
 @Component({
@@ -8,23 +7,15 @@ import { ProductsService } from 'src/app/shared/services/products/products.servi
   styleUrls: ['./sousi.component.scss']
 })
 export class SousiComponent {
-  // public product:Array<IProductResponse>=[];
-  constructor(private prodService:ProductsService){}
-  
-  ngOnInit():void{
-    this.setSubCat('All');
-    // this.loadProducts()
-  }
-  
-  // loadProducts(){
-  //   this.prodService.getAll().subscribe(data=>{
-  //     this.product=data
-  //   })
-  // }
+  constructor(private prodService: ProductsService) { }
 
-  setSubCat(subCat:string):void{
-    this.prodService.CategoryName='Соуси';
-    this.prodService.subCategoryName=subCat;
+  ngOnInit(): void {
+    this.setSubCat('All');
+  }
+
+  setSubCat(subCat: string): void {
+    this.prodService.CategoryName = 'Соуси';
+    this.prodService.subCategoryName = subCat;
     this.prodService.changeProductGroup.next(true);
   }
 }

@@ -4,10 +4,11 @@ import { HomeComponent } from './home.component';
 import { productInfoResolver } from 'src/app/shared/resolvers/product-info.resolver';
 
 const routes: Routes = [
-    {path:'',component:HomeComponent,
-    resolve:{product:productInfoResolver}
-    
-}
+  {
+    path: '', component: HomeComponent,
+    resolve: { product: productInfoResolver }
+
+  }
 ]
 
 @NgModule({

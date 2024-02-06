@@ -7,3 +7,11 @@ export interface IUserRequest {
 export interface IUserResponse extends IUserRequest {
     id:number|string;
 }
+export interface IUserPersonal {
+    uid: string,
+    email: string,
+    role: string,
+    firstName: string,
+    lastName: string,
+    phone: string
+}

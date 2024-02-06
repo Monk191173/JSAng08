@@ -1,36 +1,57 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IActionRequest,IActionResponse } from '../../interfaces/actions';
+import { IActionRequest, IActionResponse } from '../../interfaces/actions';
+import { 
+  CollectionReference,
+  DocumentReference, 
+  Firestore, 
+  addDoc, 
+  collectionData,
+  deleteDoc, 
+  doc, 
+  collection,
+  DocumentData, 
+  docData,
+  setDoc 
+} from '@angular/fire/firestore'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActionService {
-  private url = environment.BACKEND_URL;
-  private api = { actions: `${this.url}/actions` };
-  public curActionId:number=-1;
+  public curActionId: number = -1;
+  public actionsColection!: CollectionReference<DocumentData>
 
-  constructor(private http: HttpClient) { }
-
-  getAll(): Observable<IActionResponse[]> {
-    return this.http.get<IActionResponse[]>(this.api.actions);
+  constructor(
+    public afs: Firestore
+  ) {
+    this.actionsColection = collection(afs, 'actions');
   }
 
-  create(action: IActionRequest): Observable<IActionResponse> {
-    return this.http.post<IActionResponse>(this.api.actions, action);
+
+  //---------------------------------------------------------------------
+  getAllFirebase() {
+    return collectionData(this.actionsColection, { idField: 'id' })
   }
 
-  update(category: IActionRequest, id: number|string): Observable<IActionResponse> {
-    return this.http.patch<IActionResponse>(`${this.api.actions}/${id}`, category);
+  createFirebase(action: IActionRequest): Promise<DocumentReference<DocumentData>> {
+    return addDoc(this.actionsColection, action)
   }
 
-  delete(id: number|string): Observable<void> {
-    return this.http.delete<void>(`${this.api.actions}/${id}`);
+  updateFirebase(category: IActionRequest, id: string) {
+    const actRef = doc(this.afs, `actions/${id}`);
+    return setDoc(actRef, category)
   }
 
-  getOne(id: number): Observable<IActionResponse> {
-    return this.http.get<IActionResponse>(`${this.api.actions}/${id}`);
+  deleteFirebase(id: string) {
+    const actRef = doc(this.afs, `actions/${id}`);
+    return deleteDoc(actRef);
   }
+
+  getOneFirebase(id: string): Observable<IActionResponse> {
+    const actRef = doc(this.afs, `actions/${id}`);
+    return docData(actRef, { idField: 'id' }) as Observable<IActionResponse>
+  }
+
+  //---------------------------------------------------------------------
 }

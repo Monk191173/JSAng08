@@ -11,7 +11,7 @@ import { IActionResponse } from '../interfaces/actions';
 
 describe('actionResolver', () => {
   const executeResolver: ResolveFn<IActionResponse[]> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => actionResolver(...resolverParameters));
+      TestBed.runInInjectionContext(() => actionResolver(...resolverParameters) as IActionResponse[]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({

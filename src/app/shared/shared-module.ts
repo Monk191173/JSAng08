@@ -13,7 +13,7 @@ const MATERIAL = [
     MatInputModule,
     MatButtonModule,
     MatIconModule
-    
+
 ]
 
 @NgModule({
